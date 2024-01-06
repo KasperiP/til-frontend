@@ -1,12 +1,16 @@
 {
 	"name": "today-i-learned",
 	"version": "1.0.0",
-	"description": "",
 	"main": "index.js",
+	"keywords": [],
+	"author": "Kasperi Pohtinen",
+	"description": "Today I learned is an app for listing things you have learned. Share your knowledge with others and learn from others!",
+	"license": "MIT",
+	"workspaces": [
+		"packages/*",
+		"apps/*"
+	],
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC"
+	}
 }
