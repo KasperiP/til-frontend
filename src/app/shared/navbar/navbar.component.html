@@ -2,8 +2,8 @@
   <div class="flex-1">
     <a class="btn btn-ghost text-xl">TIL</a>
   </div>
-  <div class="flex-none">
-    <button class="btn btn-square btn-ghost">
+  <div class="flex gap-2">
+    <button class="btn btn-square btn-ghost md:hidden">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -17,6 +17,12 @@
           d="M4 6h16M4 12h16M4 18h16"
         ></path>
       </svg>
+    </button>
+    <button class="btn btn-ghost hidden md:block">Log in</button>
+    <button
+      class="btn hidden bg-blue-200 font-bold text-sky-800 hover:bg-blue-100 md:block"
+    >
+      Sign up
     </button>
   </div>
 </nav>
