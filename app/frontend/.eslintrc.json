@@ -1,0 +1,63 @@
+{
+  "root": true,
+  "ignorePatterns": ["projects/**/*"],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "rules": {
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "app",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "",
+            "style": "kebab-case"
+          }
+        ],
+        "@typescript-eslint/member-ordering": "error",
+        "@typescript-eslint/no-explicit-any": "off",
+        "no-console": "warn"
+      }
+    },
+    {
+      "files": ["*.html"],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended",
+        "plugin:@angular-eslint/template/accessibility"
+      ],
+      "rules": {
+        "@angular-eslint/template/attributes-order": [
+          "error",
+          {
+            "alphabetical": false,
+            "order": [
+              "STRUCTURAL_DIRECTIVE", // e.g. `*ngIf="true"`, `*ngFor="let item of items"`
+              "TEMPLATE_REFERENCE", // e.g. `<input #inputRef>`
+              "ATTRIBUTE_BINDING", // e.g. `<input required>`, `id="3"`
+              "INPUT_BINDING", // e.g. `[id]="3"`, `[attr.colspan]="colspan"`, [style.width.%]="100", [@triggerName]="expression", `bind-id="handleChange()"`
+              "TWO_WAY_BINDING", // e.g. `[(id)]="id"`, `bindon-id="id"
+              "OUTPUT_BINDING" // e.g. `(idChange)="handleChange()"`, `on-id="handleChange()"`
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["*.ts"],
+      "extends": ["plugin:@ngrx/recommended"]
+    }
+  ]
+}
