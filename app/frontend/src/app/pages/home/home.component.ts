@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { TextEditorComponent } from '../../shared/text-editor/text-editor.component';
 
 @Component({
-  selector: 'app-home',
+  selector: 'til-home',
   standalone: true,
-  imports: [],
+  imports: [TextEditorComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
