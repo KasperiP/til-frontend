@@ -1,10 +1,10 @@
 <quill-editor
-  [(ngModel)]="html"
+  placeholder=""
+  ng-invalid
   [modules]="tools"
   [format]="'object'"
   [styles]="{ height: 'calc(50vh - 125px)' }"
-  placeholder="Insert text here ..."
   [minLength]="10"
-  ng-invalid
   [required]="true"
+  [(ngModel)]="html"
 ></quill-editor>
