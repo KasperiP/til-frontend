@@ -5,26 +5,25 @@
       Log in below or create a new <strong>Today I Learned</strong>-account.
     </p>
     <div class="flex flex-col gap-2">
-      <button
-        *ngFor="let button of buttons"
-        class="btn btn-outline relative flex w-full"
-        (click)="onClose()"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="absolute left-0 start-4 inline-flex"
-          [attr.viewBox]="'0 0 24 24'"
-          [attr.width]="'32'"
-          [attr.height]="'32'"
+      @for (button of buttons; track $index) {
+        <button
+          class="btn btn-outline relative flex w-full"
+          (click)="onClose()"
         >
-          <ng-container *ngIf="button.svgPaths">
-            <ng-container *ngFor="let path of button.svgPaths">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="absolute left-0 start-4 inline-flex"
+            [attr.viewBox]="'0 0 24 24'"
+            [attr.width]="'32'"
+            [attr.height]="'32'"
+          >
+            @for (path of button.svgPaths; track $index) {
               <path [attr.d]="path.path" [attr.fill]="path.fill" />
-            </ng-container>
-          </ng-container>
-        </svg>
-        <p class="flex-1 font-bold">{{ button.text }}</p>
-      </button>
+            }
+          </svg>
+          <p class="flex-1 font-bold">{{ button.text }}</p>
+        </button>
+      }
     </div>
     <div class="modal-action">
       <form method="dialog">

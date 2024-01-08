@@ -1,17 +1,18 @@
 <section
   class="grid grid-cols-4 justify-between gap-4 px-8 py-24 max-xl:grid-cols-2 max-xl:gap-8 max-xl:overflow-hidden max-xl:px-6 max-xs:grid-cols-1"
 >
-  <div
-    *ngFor="let item of staggeringItems; let i = index"
-    class="rounded-xl p-8 shadow-xl"
-    [class]="item.color"
-    [@flyInOut]="'in'"
-    [@hoverAnimation]="item.hoverState"
-    (@flyInOut.done)="doNext()"
-    (mouseenter)="onMouseEnter(item)"
-    (mouseleave)="onMouseLeave(item)"
-  >
-    <h2 class="text-4xl font-bold">{{ item.count }}</h2>
-    <p class="text-xl font-bold">{{ item.text }}</p>
-  </div>
+  @for (item of staggeringItems; track $index) {
+    <div
+      class="rounded-xl p-8 shadow-xl"
+      [class]="item.color"
+      [@flyInOut]="'in'"
+      [@hoverAnimation]="item.hoverState"
+      (@flyInOut.done)="doNext()"
+      (mouseenter)="onMouseEnter(item)"
+      (mouseleave)="onMouseLeave(item)"
+    >
+      <h2 class="text-4xl font-bold">{{ item.count }}</h2>
+      <p class="text-xl font-bold">{{ item.text }}</p>
+    </div>
+  }
 </section>
