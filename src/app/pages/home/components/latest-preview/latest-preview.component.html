@@ -41,7 +41,7 @@
             <p class="text-sm opacity-60">{{ item.likes }} likes</p>
             <div class="flex flex-wrap gap-2">
               @for (tag of item.tags.slice(0, 3); track $index) {
-                <div class="badge badge-secondary">
+                <div class="badge">
                   {{ tag }}
                 </div>
               }
