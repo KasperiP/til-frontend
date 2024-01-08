@@ -2,7 +2,9 @@
   <h2 class="text-4xl font-bold">Learned lately</h2>
   <div class="til-preview-grid mt-8 grid gap-4">
     @for (item of tilItems; track i; let i = $index) {
-      <a class="indicator">
+      <a
+        class="indicator gap-4 transition-all duration-300 ease-in-out hover:-translate-y-1.5"
+      >
         @if (!i) {
           <span class="badge indicator-item indicator-center bg-blue-200"
             >new</span
