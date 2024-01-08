@@ -1,0 +1,38 @@
+<dialog #authModal id="authModal" class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box">
+    <h2 class="text-3xl font-bold">Create an account or log in</h2>
+    <p class="pb-8 pt-4">
+      Log in below or create a new <strong>Today I Learned</strong>-account.
+    </p>
+    <div class="flex flex-col gap-2">
+      <button
+        *ngFor="let button of buttons"
+        class="btn btn-outline relative flex w-full"
+        (click)="onClose()"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="absolute left-0 start-4 inline-flex"
+          [attr.viewBox]="'0 0 24 24'"
+          [attr.width]="'32'"
+          [attr.height]="'32'"
+        >
+          <ng-container *ngIf="button.svgPaths">
+            <ng-container *ngFor="let path of button.svgPaths">
+              <path [attr.d]="path.path" [attr.fill]="path.fill" />
+            </ng-container>
+          </ng-container>
+        </svg>
+        <p class="flex-1 font-bold">{{ button.text }}</p>
+      </button>
+    </div>
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn" (click)="onClose()">Close</button>
+      </form>
+    </div>
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button (click)="onClose()">close</button>
+  </form>
+</dialog>
