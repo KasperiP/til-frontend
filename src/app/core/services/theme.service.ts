@@ -8,7 +8,7 @@ import { ThemeEnum } from '../models/theme.model';
 })
 export class ThemeService {
   currentTheme$: BehaviorSubject<ThemeEnum>;
-  private readonly default = ThemeEnum.DARK;
+  private readonly default = ThemeEnum.LIGHT;
 
   constructor(@Inject(PLATFORM_ID) readonly platformId: string) {
     this.currentTheme$ = new BehaviorSubject<ThemeEnum>(this.default);

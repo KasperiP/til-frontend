@@ -22,17 +22,6 @@ module.exports = {
   daisyui: {
     themes: [
       {
-        dark: {
-          ...require('daisyui/src/theming/themes')['dark'],
-          primary: '#f7f0cd',
-          '--divider': '#f3f3f3',
-          'neutral-content': '#f3f3f3',
-          'base-100': '#fff',
-          neutral: '#fff',
-          '--typography-primary': '#202125',
-        },
-      },
-      {
         light: {
           ...require('daisyui/src/theming/themes')['light'],
           primary: '#f7f0cd',
