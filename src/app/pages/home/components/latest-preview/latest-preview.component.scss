@@ -1,0 +1,15 @@
+.til-preview-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.til-preview-grid > a:nth-child(3n) {
+  @apply rounded-lg border-2 border-dashed border-blue-300 bg-blue-200;
+}
+
+.til-preview-grid > a:nth-child(3n + 1) {
+  @apply rounded-lg bg-green-200;
+}
+
+.til-preview-grid > a:nth-child(3n + 2) {
+  @apply rounded-lg bg-neutral;
+}

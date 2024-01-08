@@ -1,0 +1,54 @@
+<section class="overflow-hidden px-8 py-20">
+  <h2 class="text-4xl font-bold">Learned lately</h2>
+  <div class="til-preview-grid mt-8 grid gap-4">
+    @for (item of tilItems; track i; let i = $index) {
+      <a class="indicator">
+        @if (!i) {
+          <span class="badge indicator-item indicator-center bg-blue-200"
+            >new</span
+          >
+        }
+        <div class="flex w-96 cursor-pointer break-inside-avoid flex-col p-6">
+          <div class="flex flex-col gap-4">
+            <div class="flex items-center gap-4">
+              <div class="avatar">
+                <div class="w-12 rounded-full">
+                  <img
+                    alt="Avatar"
+                    src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                  />
+                </div>
+              </div>
+              <div class="flex flex-col overflow-auto">
+                <h3 class="truncate font-bold">
+                  {{ item.title }}
+                </h3>
+                <p class="truncate text-sm text-gray-500">
+                  by {{ item.author }}
+                </p>
+              </div>
+            </div>
+            <p class="text-sm">
+              {{
+                item.description.length > 100
+                  ? item.description.substring(0, 100) + '...'
+                  : item.description
+              }}
+            </p>
+          </div>
+          <div class="divider my-1"></div>
+          <div class="flex flex-col gap-2">
+            <p class="text-sm opacity-60">{{ item.likes }} likes</p>
+            <div class="flex flex-wrap gap-2">
+              @for (tag of item.tags.slice(0, 3); track $index) {
+                <div class="badge badge-secondary">
+                  {{ tag }}
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+      </a>
+    }
+  </div>
+</section>
