@@ -12,7 +12,6 @@ export class NavbarComponent {
   showAuthModalSig = signal(false);
 
   toggleAuthModal(): void {
-    console.log('toggleAuthModal');
     this.showAuthModalSig.update((value) => !value);
   }
 }
