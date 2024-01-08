@@ -41,8 +41,8 @@ export class LearnedCardsComponent {
   items = [
     {
       color: 'bg-yellow-200',
-      count: '450+',
-      text: 'Learned things',
+      count: '100+',
+      text: 'Users',
       hoverState: 'normal',
     },
     {
@@ -54,13 +54,13 @@ export class LearnedCardsComponent {
     {
       color: 'bg-pink-200',
       count: '450+',
-      text: 'Learned things',
+      text: 'Longest streak',
       hoverState: 'normal',
     },
     {
       color: 'bg-green-200',
       count: '450+',
-      text: 'Learned things',
+      text: 'Given likes',
       hoverState: 'normal',
     },
   ];
