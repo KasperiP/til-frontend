@@ -1,6 +1,32 @@
 {
   "name": "til-frontend",
   "version": "0.0.0",
+  "author": {
+    "email": "kasperi.pohtine@gmail.com",
+    "name": "Kasperi Pohtinen",
+    "url": "https://kasperipohtinen.fi"
+  },
+  "description": "Share your knowledge with the world",
+  "keywords": [
+    "angular",
+    "typescript",
+    "tailwindcss",
+    "til",
+    "daisyui"
+  ],
+  "repository": {
+		"type": "git",
+		"url": "https://github.com/KasperiP/til-frontend.git"
+	},
+	"bugs": {
+		"url": "https://github.com/KasperiP/til-frontend/issues"
+	},
+  "homepage": "https://todayilearned.app",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "packageManager": "pnpm@8.14.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
