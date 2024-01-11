@@ -1,57 +1,80 @@
 <til-auth-modal [show]="showAuthModalSig()" (closeModal)="toggleAuthModal()" />
-<nav class="navbar bg-base-100">
-  <div class="flex-1">
-    <a
-      class="btn btn-ghost px-0 text-lg font-extrabold text-typography-primary hover:bg-transparent"
-    >
-      <div class="inline-block rounded-lg bg-yellow-200 p-2">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="32"
-          viewBox="0 -960 960 960"
-          width="32"
-          fill="currentColor"
-        >
-          <path
-            d="M480-80q-33 0-66.5-23.5T400-160h160q0 33-23.5 56.5T480-80ZM320-200v-80h320v80H320Zm10-120q-69-41-109.5-110T180-580q0-125 87.5-212.5T480-880q125 0 212.5 87.5T780-580q0 81-40.5 150T630-320H330Zm24-80h252q45-32 69.5-79T700-580q0-92-64-156t-156-64q-92 0-156 64t-64 156q0 54 24.5 101t69.5 79Zm126 0Z"
-          />
-        </svg>
-      </div>
-      Today I Learned</a
-    >
-  </div>
-  <div class="flex gap-2">
-    <div class="dropdown dropdown-end md:hidden">
-      <button class="btn btn-square btn-ghost">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          class="inline-block h-6 w-6 stroke-current"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16"
-          ></path>
-        </svg>
-      </button>
-      <ul
-        tabindex="0"
-        class="menu dropdown-content z-[1] w-52 rounded-box bg-base-100 p-2 shadow"
+
+<ng-container *ngTemplateOutlet="navbar; context: { user: user$ | async }" />
+
+<ng-template #navbar let-user="user">
+  <nav class="navbar bg-base-100">
+    <div class="flex-1">
+      <a
+        class="btn btn-ghost px-0 text-lg font-extrabold text-typography-primary hover:bg-transparent"
       >
-        <li><button (click)="toggleAuthModal()">Login or register</button></li>
-      </ul>
+        <div class="inline-block rounded-lg bg-yellow-200 p-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="32"
+            viewBox="0 -960 960 960"
+            width="32"
+            fill="currentColor"
+          >
+            <path
+              d="M480-80q-33 0-66.5-23.5T400-160h160q0 33-23.5 56.5T480-80ZM320-200v-80h320v80H320Zm10-120q-69-41-109.5-110T180-580q0-125 87.5-212.5T480-880q125 0 212.5 87.5T780-580q0 81-40.5 150T630-320H330Zm24-80h252q45-32 69.5-79T700-580q0-92-64-156t-156-64q-92 0-156 64t-64 156q0 54 24.5 101t69.5 79Zm126 0Z"
+            />
+          </svg>
+        </div>
+        Today I Learned</a
+      >
     </div>
-    <button class="btn btn-ghost hidden md:block" (click)="toggleAuthModal()">
-      Log in
-    </button>
-    <button
-      class="btn hidden bg-blue-200 font-bold text-sky-800 hover:bg-blue-100 md:block"
-      (click)="toggleAuthModal()"
-    >
-      Sign up
-    </button>
-  </div>
-</nav>
+    <div class="flex gap-2">
+      <div class="dropdown dropdown-end md:hidden">
+        <button class="btn btn-square btn-ghost">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            class="inline-block h-6 w-6 stroke-current"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            ></path>
+          </svg>
+        </button>
+        <ul
+          tabindex="0"
+          class="menu dropdown-content z-[1] w-52 rounded-box bg-base-100 p-2 shadow"
+        >
+          @if (user) {
+            <li><button (click)="logout()">Logout</button></li>
+          } @else {
+            <li>
+              <button (click)="toggleAuthModal()">Login or register</button>
+            </li>
+          }
+        </ul>
+      </div>
+      @if (user) {
+        <button
+          class="btn hidden bg-blue-200 font-bold text-sky-800 hover:bg-blue-100 md:block"
+          (click)="logout()"
+        >
+          Logout
+        </button>
+      } @else {
+        <button
+          class="btn btn-ghost hidden md:block"
+          (click)="toggleAuthModal()"
+        >
+          Login
+        </button>
+        <button
+          class="btn hidden bg-blue-200 font-bold text-sky-800 hover:bg-blue-100 md:block"
+          (click)="toggleAuthModal()"
+        >
+          Sign up
+        </button>
+      }
+    </div>
+  </nav>
+</ng-template>

@@ -1,14 +1,14 @@
 <dialog #authModal id="authModal" class="modal modal-bottom sm:modal-middle">
   <div class="modal-box">
-    <h2 class="text-3xl font-bold">Create an account or log in</h2>
+    <h2 class="text-3xl font-bold">Create an account or login</h2>
     <p class="pb-8 pt-4">
-      Log in below or create a new <strong>Today I Learned</strong>-account.
+      Login below or create a new <strong>Today I Learned</strong>-account.
     </p>
     <div class="flex flex-col gap-2">
       @for (button of buttons; track $index) {
         <button
           class="btn btn-outline relative flex w-full"
-          (click)="onClose()"
+          (click)="onAuth(button.type)"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
