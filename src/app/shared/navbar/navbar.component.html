@@ -44,7 +44,7 @@
         </button>
         <ul
           tabindex="0"
-          class="menu dropdown-content z-[1] w-64 rounded-box bg-base-100 p-2 shadow"
+          class="menu dropdown-content z-[1] w-64 gap-1 rounded-box bg-base-100 p-2 shadow"
         >
           @if (user) {
             <a
@@ -128,8 +128,25 @@
           </button>
           <ul
             tabindex="0"
-            class="menu dropdown-content z-[1] w-52 rounded-box bg-base-100 p-2 shadow"
+            class="menu dropdown-content z-[1] w-64 gap-1 rounded-box bg-base-100 p-2 shadow"
           >
+            <a
+              class="btn-ghost flex items-center gap-2 rounded-lg px-4 py-1"
+              routerLink="/profile"
+              (click)="closeMenu()"
+            >
+              <div class="avatar">
+                <div class="w-11 rounded-full">
+                  <img [src]="user.image" [alt]="user.name + '\'s avatar'" />
+                </div>
+              </div>
+              <div>
+                <div class="font-semibold">Profile</div>
+                <div class="text-left text-xs text-opacity-50">
+                  {{ user.name }}
+                </div>
+              </div>
+            </a>
             <li>
               <button class="font-semibold" (click)="logout()">Logout</button>
             </li>
