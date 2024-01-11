@@ -7,6 +7,7 @@
     <div class="flex-1">
       <a
         class="btn btn-ghost px-0 text-lg font-extrabold text-typography-primary hover:bg-transparent"
+        routerLink="/"
       >
         <div class="inline-block rounded-lg bg-yellow-200 p-2">
           <svg
@@ -62,10 +63,10 @@
               </div>
             </button>
             <li>
-              <a class="font-semibold">Feed</a>
+              <a class="font-semibold" routerLink="/feed">Feed</a>
             </li>
             <li>
-              <a class="font-semibold"> Write a post</a>
+              <a class="font-semibold" routerLink="/writer"> Write a post</a>
             </li>
             <div class="divider my-1"></div>
             <li>
@@ -73,7 +74,7 @@
             </li>
           } @else {
             <li>
-              <a class="font-semibold">Feed</a>
+              <a class="font-semibold" routerLink="/feed">Feed</a>
             </li>
             <li>
               <button class="font-semibold" (click)="toggleAuthModal()">
@@ -83,9 +84,15 @@
           }
         </ul>
       </div>
-      <a class="hidden cursor-pointer font-semibold md:block">Feed</a>
+      <a class="hidden cursor-pointer font-semibold md:block" routerLink="/feed"
+        >Feed</a
+      >
       @if (user) {
-        <a class="hidden cursor-pointer font-semibold md:block">Write a text</a>
+        <a
+          class="hidden cursor-pointer font-semibold md:block"
+          routerLink="/writer"
+          >Write a text</a
+        >
         <div class="dropdown dropdown-end hidden md:block">
           <button class="btn btn-circle btn-ghost">
             <div class="avatar">

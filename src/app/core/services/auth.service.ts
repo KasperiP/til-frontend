@@ -27,6 +27,7 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
+    localStorage.removeItem('isLoggedIn');
     return this.http
       .post(`${environment.baseUrl}/api/auth/logout`, {})
       .pipe(catchError((e) => this.errorHandlingService.handleError(e)));
