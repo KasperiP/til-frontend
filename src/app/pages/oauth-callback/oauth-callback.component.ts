@@ -1,7 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError, finalize, of, take, tap } from 'rxjs';
+import { catchError, of, take, tap } from 'rxjs';
 import { User } from '../../core/models/api.model';
 import { SupportedOauthProviders } from '../../core/models/auth.model';
 import { AuthService } from '../../core/services/auth.service';
@@ -46,13 +46,20 @@ export class OauthCallbackComponent implements OnInit {
         tap((user: User) => {
           localStorage.setItem('isLoggedIn', '1');
           this.userService.setUser(user);
+          this.router.navigate(['/']);
         }),
         catchError((e) => {
           localStorage.removeItem('isLoggedIn');
+          if (!e?.code) {
+            this.router.navigate(['/']);
+          } else {
+            this.router.navigate(['/'], {
+              queryParams: e?.data?.provider
+                ? { error: e.code, wantedProvider: e.data.provider }
+                : { error: e.code },
+            });
+          }
           return of(e);
-        }),
-        finalize(() => {
-          this.router.navigate(['/']);
         }),
       )
       .subscribe();

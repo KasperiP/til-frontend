@@ -1,0 +1,22 @@
+<dialog #errorModal id="errorModal" class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box">
+    <h2 class="text-3xl font-bold">Error occurred</h2>
+    <p class="pt-4">
+      @if (error && wantedProvider) {
+        You already have an account with <strong>{{ wantedProvider }}</strong
+        >. Please login with that account or if you can't use that account,
+        please contact us.
+      } @else {
+        Something went wrong. Please try again later.
+      }
+    </p>
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn" (click)="onClose()">Close</button>
+      </form>
+    </div>
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button (click)="onClose()">close</button>
+  </form>
+</dialog>

@@ -30,6 +30,7 @@ export class ErrorHandlerService {
         status: error.status,
         message: error.message || error.statusText,
         code: error.error?.code,
+        data: error.error?.data,
         isError: true,
       }),
     );
