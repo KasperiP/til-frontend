@@ -24,7 +24,7 @@
         Today I Learned</a
       >
     </div>
-    <div class="flex gap-2">
+    <div class="flex gap-6">
       <div class="dropdown dropdown-end md:hidden">
         <button class="btn btn-square btn-ghost">
           <svg
@@ -43,27 +43,69 @@
         </button>
         <ul
           tabindex="0"
-          class="menu dropdown-content z-[1] w-52 rounded-box bg-base-100 p-2 shadow"
+          class="menu dropdown-content z-[1] w-64 rounded-box bg-base-100 p-2 shadow"
         >
           @if (user) {
-            <li><button (click)="logout()">Logout</button></li>
+            <button
+              class="btn-ghost flex items-center gap-2 rounded-lg px-4 py-1"
+            >
+              <div class="avatar">
+                <div class="w-11 rounded-full">
+                  <img [src]="user.image" [alt]="user.name + '\'s avatar'" />
+                </div>
+              </div>
+              <div>
+                <div class="font-semibold">Profile</div>
+                <div class="text-left text-xs text-opacity-50">
+                  {{ user.name }}
+                </div>
+              </div>
+            </button>
+            <li>
+              <a class="font-semibold">Feed</a>
+            </li>
+            <li>
+              <a class="font-semibold"> Write a post</a>
+            </li>
+            <div class="divider my-1"></div>
+            <li>
+              <button class="font-semibold" (click)="logout()">Logout</button>
+            </li>
           } @else {
             <li>
-              <button (click)="toggleAuthModal()">Login or register</button>
+              <a class="font-semibold">Feed</a>
+            </li>
+            <li>
+              <button class="font-semibold" (click)="toggleAuthModal()">
+                Login or register
+              </button>
             </li>
           }
         </ul>
       </div>
+      <a class="hidden cursor-pointer font-semibold md:block">Feed</a>
       @if (user) {
-        <button
-          class="btn hidden bg-blue-200 font-bold text-sky-800 hover:bg-blue-100 md:block"
-          (click)="logout()"
-        >
-          Logout
-        </button>
+        <a class="hidden cursor-pointer font-semibold md:block">Write a text</a>
+        <div class="dropdown dropdown-end hidden md:block">
+          <button class="btn btn-circle btn-ghost">
+            <div class="avatar">
+              <div class="w-11 rounded-full">
+                <img [src]="user.image" [alt]="user.name + '\'s avatar'" />
+              </div>
+            </div>
+          </button>
+          <ul
+            tabindex="0"
+            class="menu dropdown-content z-[1] w-52 rounded-box bg-base-100 p-2 shadow"
+          >
+            <li>
+              <button class="font-semibold" (click)="logout()">Logout</button>
+            </li>
+          </ul>
+        </div>
       } @else {
         <button
-          class="btn btn-ghost hidden md:block"
+          class="hidden cursor-pointer font-semibold md:block"
           (click)="toggleAuthModal()"
         >
           Login
