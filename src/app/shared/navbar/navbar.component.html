@@ -47,8 +47,10 @@
           class="menu dropdown-content z-[1] w-64 rounded-box bg-base-100 p-2 shadow"
         >
           @if (user) {
-            <button
+            <a
               class="btn-ghost flex items-center gap-2 rounded-lg px-4 py-1"
+              routerLink="/profile"
+              (click)="closeMenu()"
             >
               <div class="avatar">
                 <div class="w-11 rounded-full">
@@ -61,12 +63,25 @@
                   {{ user.name }}
                 </div>
               </div>
-            </button>
+            </a>
             <li>
-              <a class="font-semibold" routerLink="/feed">Feed</a>
+              <a class="font-semibold" routerLink="/" (click)="closeMenu()"
+                >Home</a
+              >
             </li>
             <li>
-              <a class="font-semibold" routerLink="/writer"> Write a post</a>
+              <a class="font-semibold" routerLink="/feed" (click)="closeMenu()"
+                >Feed</a
+              >
+            </li>
+            <li>
+              <a
+                class="font-semibold"
+                routerLink="/writer"
+                (click)="closeMenu()"
+              >
+                Write a post</a
+              >
             </li>
             <div class="divider my-1"></div>
             <li>
@@ -74,7 +89,14 @@
             </li>
           } @else {
             <li>
-              <a class="font-semibold" routerLink="/feed">Feed</a>
+              <a class="font-semibold" routerLink="/" (click)="closeMenu()"
+                >Home</a
+              >
+            </li>
+            <li>
+              <a class="font-semibold" routerLink="/feed" (click)="closeMenu()"
+                >Feed</a
+              >
             </li>
             <li>
               <button class="font-semibold" (click)="toggleAuthModal()">
@@ -94,13 +116,17 @@
           >Write a text</a
         >
         <div class="dropdown dropdown-end hidden md:block">
-          <button class="btn btn-circle btn-ghost">
+          <a
+            class="btn btn-circle btn-ghost"
+            routerLink="/profile"
+            (click)="closeMenu()"
+          >
             <div class="avatar">
               <div class="w-11 rounded-full">
                 <img [src]="user.image" [alt]="user.name + '\'s avatar'" />
               </div>
             </div>
-          </button>
+          </a>
           <ul
             tabindex="0"
             class="menu dropdown-content z-[1] w-52 rounded-box bg-base-100 p-2 shadow"

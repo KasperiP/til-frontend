@@ -33,6 +33,10 @@ export class NavbarComponent implements OnInit {
     this.showAuthModalSig.update((value) => !value);
   }
 
+  closeMenu() {
+    (document.activeElement as any)?.blur();
+  }
+
   ngOnInit(): void {
     const user = this.user$.value;
     if (!user) {
