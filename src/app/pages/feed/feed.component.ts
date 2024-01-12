@@ -1,97 +1,42 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-  signal,
-} from '@angular/core';
-import {
-  BehaviorSubject,
-  Subject,
-  filter,
-  fromEvent,
-  map,
-  switchMap,
-  takeUntil,
-  tap,
-  throttleTime,
-} from 'rxjs';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { PostsService } from '../../core/services/posts.service';
+import { TilItemComponent } from './components/til-item/til-item.component';
 import { Posts } from './models/posts.model';
 
 @Component({
   selector: 'til-feed',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TilItemComponent],
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FeedComponent implements OnInit, OnDestroy {
-  limit = 10;
-  loadingSig = signal(false);
-  posts$ = new BehaviorSubject<Posts[]>([]);
-  private offset$ = new BehaviorSubject<number>(0);
-  private readonly onDestroy$ = new Subject<void>();
-  private scrollEvent$ = fromEvent(window, 'scroll');
-  private loading = false;
-  private hasMorePosts = true;
+export class FeedComponent {
+  readonly postsSig = signal<Posts[]>([]);
+  readonly loadingSig = signal(false);
+  private triggerId: number | null = null;
+  private hasMore = true;
+  private readonly limit = 10;
 
   constructor(private readonly postsService: PostsService) {
-    this.offset$
-      .pipe(
-        takeUntil(this.onDestroy$),
-        switchMap((offset) => {
-          this.setLoading(true);
-          return this.postsService.getPosts(this.limit, offset);
-        }),
-        tap((posts) => {
-          if (!posts.hasMore) {
-            this.hasMorePosts = false;
-          }
-          this.setLoading(false);
-          this.posts$.next(this.posts$.getValue().concat(posts.posts));
-        }),
-      )
-      .subscribe();
+    this.loadPosts();
   }
 
-  ngOnInit(): void {
-    this.scrollEvent$
-      .pipe(
-        throttleTime(100),
-        map(() => this.isNearBottom()),
-        filter(
-          (isNearBottom) => isNearBottom && !this.loading && this.hasMorePosts,
-        ),
-        takeUntil(this.onDestroy$),
-      )
-      .subscribe(() => {
-        this.loadMorePosts();
-      });
-  }
-
-  ngOnDestroy(): void {
-    this.onDestroy$.next();
-    this.onDestroy$.complete();
-  }
-
-  private isNearBottom(): boolean {
-    return (
-      window.innerHeight + window.scrollY >= document.body.offsetHeight - 500
-    );
-  }
-
-  private loadMorePosts(): void {
-    if (!this.loading && this.hasMorePosts) {
-      const currentOffset = this.offset$.getValue();
-      this.offset$.next(currentOffset + this.limit);
+  loaded(id: number) {
+    if (this.triggerId === id) {
+      this.loadPosts(this.postsSig().length);
     }
   }
 
-  private setLoading(value: boolean): void {
-    this.loadingSig.set(value);
-    this.loading = value;
-  }
+  private loadPosts = (offset = 0) => {
+    if (!this.hasMore) return;
+    this.loadingSig.set(true);
+    this.postsService.getPosts(this.limit, offset).subscribe((posts) => {
+      this.postsSig.update((oldPosts) => [...oldPosts, ...posts.posts]);
+      this.triggerId = posts.posts[posts.posts.length - 1]?.postId;
+      this.hasMore = posts.hasMore;
+      this.loadingSig.set(false);
+    });
+  };
 }

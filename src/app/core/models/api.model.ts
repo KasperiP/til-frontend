@@ -18,7 +18,7 @@ export interface User {
 }
 
 export interface Post extends User {
-  id: number;
+  postId: number;
   title: string;
   content: string;
   createdAt: Date;
