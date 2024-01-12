@@ -23,8 +23,13 @@
           </article>
         }
         @if (loading) {
-          <div class="mt-4 flex justify-center">
-            <span class="loading loading-spinner loading-lg"></span>
+          <div
+            class="mt-4 flex flex-col items-center justify-center gap-2 opacity-60"
+          >
+            <span
+              class="loading loading-spinner loading-lg bg-typography-primary"
+            ></span>
+            <p class="text-sm font-semibold">Loading</p>
           </div>
         }
       </div>
