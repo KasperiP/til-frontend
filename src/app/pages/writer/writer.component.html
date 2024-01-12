@@ -6,18 +6,76 @@
     vero amet inventore cupiditate nulla. Libero, odio expedita. Velit, nostrum
     alias.
   </p>
-  <label class="form-control mb-4 w-full max-w-xs">
-    <div class="label">
-      <span class="label-text">Title</span>
+  <div role="tablist" class="tabs tabs-lifted">
+    <input
+      type="radio"
+      name="writerTabs"
+      role="tab"
+      class="tab"
+      aria-label="Write"
+      checked
+    />
+    <div
+      role="tabpanel"
+      class="tab-content rounded-box border-base-300 bg-base-100 p-6"
+    >
+      <form [formGroup]="form">
+        <label class="form-control mb-4 w-full max-w-xs max-md:max-w-full">
+          <div class="label">
+            <span class="label-text"
+              >Title
+              <span class="text-gray-400">
+                ({{ form.value.title.length }} / 50)
+              </span>
+            </span>
+          </div>
+          <input
+            maxlength="50"
+            formControlName="title"
+            type="text"
+            placeholder="Type here"
+            class="input input-bordered w-full max-w-xs max-md:max-w-full"
+          />
+        </label>
+        <label class="form-control">
+          <div class="label">
+            <span class="label-text"
+              >What you have learned
+              <span class="text-gray-400">
+                ({{ form.value.content.length }} / 5000)
+              </span></span
+            >
+          </div>
+          <textarea
+            rows="6"
+            maxlength="5000"
+            formControlName="content"
+            class="textarea textarea-bordered max-h-[800px]"
+            placeholder="Write about what you have learned today"
+          ></textarea>
+        </label>
+      </form>
     </div>
     <input
-      type="text"
-      placeholder="Type here"
-      class="input input-bordered w-full max-w-xs"
+      type="radio"
+      name="writerTabs"
+      role="tab"
+      class="tab"
+      aria-label="Preview"
     />
-  </label>
-  <til-text-editor />
-  <button class="btn mt-4 bg-blue-200 font-bold text-sky-800 hover:bg-blue-100">
+    <div
+      role="tabpanel"
+      class="tab-content rounded-box border-base-300 bg-base-100 p-6"
+    >
+      <article class="til-markdown prose">
+        <markdown clipboard [data]="form.value.content" />
+      </article>
+    </div>
+  </div>
+  <button
+    class="btn mt-4 bg-blue-200 font-bold text-sky-800 hover:bg-blue-100"
+    (click)="submit()"
+  >
     Submit
   </button>
 </section>

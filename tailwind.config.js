@@ -2,9 +2,17 @@
 module.exports = {
   mode: 'jit',
   content: ['./src/**/*.{html,ts}'],
-  darkMode: 'class',
+  darkMode: false,
   theme: {
     extend: {
+      typography: ({ theme }) => ({
+        custom: {
+          css: {
+            '--tw-prose-headings': theme('colors.typography.primary'),
+            '--tw-prose-links': theme('colors.sky.800'),
+          },
+        },
+      }),
       screens: {
         xs: '375px',
       },

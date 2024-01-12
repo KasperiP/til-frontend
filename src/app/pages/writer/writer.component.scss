@@ -1,0 +1,9 @@
+.til-markdown {
+  @apply prose-custom;
+
+  .language-js {
+    span {
+      font-family: monospace;
+    }
+  }
+}
