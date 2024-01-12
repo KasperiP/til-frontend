@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { PostsService } from '../../core/services/posts.service';
+import { FeedMenuComponent } from './components/feed-menu/feed-menu.component';
 import { TilItemComponent } from './components/til-item/til-item.component';
 import { Posts } from './models/posts.model';
 
 @Component({
   selector: 'til-feed',
   standalone: true,
-  imports: [CommonModule, TilItemComponent],
+  imports: [CommonModule, TilItemComponent, FeedMenuComponent],
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
