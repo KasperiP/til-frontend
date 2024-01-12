@@ -21,7 +21,8 @@ export interface Post extends User {
   postId: number;
   title: string;
   content: string;
-  createdAt: Date;
+  postCreatedAt: Date;
+  tags: string[];
 }
 
 export interface PostPreview {

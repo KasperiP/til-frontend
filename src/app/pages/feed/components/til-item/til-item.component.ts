@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,7 +12,7 @@ import { Posts } from '../../models/posts.model';
 @Component({
   selector: 'til-til-item',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './til-item.component.html',
   styleUrl: './til-item.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
