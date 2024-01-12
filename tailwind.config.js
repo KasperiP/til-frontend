@@ -2,7 +2,6 @@
 module.exports = {
   mode: 'jit',
   content: ['./src/**/*.{html,ts}'],
-  darkMode: false,
   theme: {
     extend: {
       typography: ({ theme }) => ({
