@@ -1,174 +1,193 @@
-<section class="px-8 py-20 max-md:px-4">
-  <h2 class="text-4xl font-bold">Learned today</h2>
-  <p class="max-w-2xl py-4">
-    Write about what you have learned today. It can be
-    <strong>anything</strong>, from a new programming language, a new framework.
-    Or it can be a new life lesson, a new way of thinking, or a new way of doing
-    things. Only your imagination is the limit.
-  </p>
-  @if (errorSig()) {
-    <div role="alert" class="alert alert-error">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-6 w-6 shrink-0 stroke-current"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-        />
-      </svg>
-      <span>
-        {{ errorSig()?.code || errorSig()?.message }}
-      </span>
-    </div>
-  }
-  @if (formSuccess()) {
-    <div role="alert" class="alert alert-success">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-6 w-6 shrink-0 stroke-current"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-        />
-      </svg>
-      <span> Your post has been submitted successfully.</span>
-    </div>
-  }
-  <div role="tablist" class="tabs tabs-lifted mt-4">
-    <input
-      type="radio"
-      name="writerTabs"
-      role="tab"
-      class="tab"
-      aria-label="Write"
-      checked
-    />
-    <div
-      role="tabpanel"
-      class="tab-content rounded-box border-base-300 bg-base-100 p-6 max-md:p-4"
-    >
-      <form [formGroup]="form">
-        <label class="form-control mb-4 w-full max-w-xs max-md:max-w-full">
-          <div class="label">
-            <span class="label-text"
-              >Title
-              <span class="text-gray-400">
-                ({{ form.value.title?.length ?? 0 }} / 50)
-              </span>
-            </span>
-          </div>
-          <input
-            maxlength="50"
-            formControlName="title"
-            type="text"
-            placeholder="Type here"
-            class="input input-bordered w-full max-w-xs max-md:max-w-full"
-            [ngClass]="{
-              'input-error':
-                form.controls['title'].touched && form.controls['title'].invalid
-            }"
+<ng-container
+  *ngTemplateOutlet="
+    writer;
+    context: {
+      error: errorSig(),
+      loading: loadingSig(),
+      formSuccess: formSuccessSig()
+    }
+  "
+/>
+
+<ng-template
+  #writer
+  let-error="error"
+  let-loading="loading"
+  let-formSuccess="formSuccess"
+>
+  <section class="px-8 py-20 max-md:px-4">
+    <h2 class="text-4xl font-bold">Learned today</h2>
+    <p class="max-w-2xl py-4">
+      Write about what you have learned today. It can be
+      <strong>anything</strong>, from a new programming language, a new
+      framework. Or it can be a new life lesson, a new way of thinking, or a new
+      way of doing things. Only your imagination is the limit.
+    </p>
+    @if (error) {
+      <div role="alert" class="alert alert-error">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 shrink-0 stroke-current"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
           />
-          <label
-            *ngIf="
-              form.controls['title'].touched && form.controls['title'].invalid
-            "
-            class="label"
-            for="title"
-          >
-            <span class="label-text-alt text-error">
-              {{
-                form.controls['title'].errors?.['required']
-                  ? 'Title is required'
-                  : form.controls['title'].errors?.['maxlength']
-                    ? 'Title is too long. Max 50 characters'
-                    : 'Title is too short. Min 5 characters'
-              }}
-            </span>
-          </label>
-        </label>
-        <label class="form-control">
-          <div class="label">
-            <span class="label-text"
-              >What you have learned
-              <span class="text-gray-400">
-                ({{ form.value.content?.length ?? 0 }} / 5000)
-              </span></span
+        </svg>
+        <span>
+          {{ error?.code || error?.message }}
+        </span>
+      </div>
+    }
+    @if (formSuccess) {
+      <div role="alert" class="alert alert-success">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 shrink-0 stroke-current"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        <span> Your post has been submitted successfully.</span>
+      </div>
+    }
+    <div role="tablist" class="tabs tabs-lifted mt-4">
+      <input
+        type="radio"
+        name="writerTabs"
+        role="tab"
+        class="tab"
+        aria-label="Write"
+        checked
+      />
+      <div
+        role="tabpanel"
+        class="tab-content rounded-box border-base-300 bg-base-100 p-6 max-md:p-4"
+      >
+        <form [formGroup]="form">
+          <label class="form-control mb-4 w-full max-w-xs max-md:max-w-full">
+            <div class="label">
+              <span class="label-text"
+                >Title
+                <span class="text-gray-400">
+                  ({{ form.value.title?.length ?? 0 }} / 50)
+                </span>
+              </span>
+            </div>
+            <input
+              maxlength="50"
+              formControlName="title"
+              type="text"
+              placeholder="Type here"
+              class="input input-bordered w-full max-w-xs max-md:max-w-full"
+              [ngClass]="{
+                'input-error':
+                  form.controls['title'].touched &&
+                  form.controls['title'].invalid
+              }"
+            />
+            <label
+              *ngIf="
+                form.controls['title'].touched && form.controls['title'].invalid
+              "
+              class="label"
+              for="title"
             >
-          </div>
-          <textarea
-            rows="6"
-            maxlength="5000"
-            formControlName="content"
-            class="textarea textarea-bordered max-h-[800px]"
-            placeholder="Write about what you have learned today"
-            [ngClass]="{
-              'border-error':
+              <span class="label-text-alt text-error">
+                {{
+                  form.controls['title'].errors?.['required']
+                    ? 'Title is required'
+                    : form.controls['title'].errors?.['maxlength']
+                      ? 'Title is too long. Max 50 characters'
+                      : 'Title is too short. Min 5 characters'
+                }}
+              </span>
+            </label>
+          </label>
+          <label class="form-control">
+            <div class="label">
+              <span class="label-text"
+                >What you have learned
+                <span class="text-gray-400">
+                  ({{ form.value.content?.length ?? 0 }} / 5000)
+                </span></span
+              >
+            </div>
+            <textarea
+              rows="6"
+              maxlength="5000"
+              formControlName="content"
+              class="textarea textarea-bordered max-h-[800px]"
+              placeholder="Write about what you have learned today"
+              [ngClass]="{
+                'border-error':
+                  form.controls['content'].touched &&
+                  form.controls['content'].invalid
+              }"
+            ></textarea>
+            <label
+              *ngIf="
                 form.controls['content'].touched &&
                 form.controls['content'].invalid
-            }"
-          ></textarea>
-          <label
-            *ngIf="
-              form.controls['content'].touched &&
-              form.controls['content'].invalid
-            "
-            class="label"
-            for="content"
-          >
-            <span class="label-text-alt text-error">
-              {{
-                form.controls['content'].errors?.['required']
-                  ? 'Content is required'
-                  : form.controls['content'].errors?.['maxlength']
-                    ? 'Content is too long. Max 5000 characters'
-                    : 'Content is too short. Min 30 characters'
-              }}
-            </span>
+              "
+              class="label"
+              for="content"
+            >
+              <span class="label-text-alt text-error">
+                {{
+                  form.controls['content'].errors?.['required']
+                    ? 'Content is required'
+                    : form.controls['content'].errors?.['maxlength']
+                      ? 'Content is too long. Max 5000 characters'
+                      : 'Content is too short. Min 30 characters'
+                }}
+              </span>
+            </label>
           </label>
-        </label>
-      </form>
+        </form>
+      </div>
+      <input
+        type="radio"
+        name="writerTabs"
+        role="tab"
+        class="tab"
+        aria-label="Preview"
+      />
+      <div
+        role="tabpanel"
+        class="tab-content rounded-box border-base-300 bg-base-100 p-6 max-md:p-4"
+      >
+        <article class="til-markdown prose">
+          @if (!form.value.content?.length) {
+            <p class="text-sm text-gray-400">
+              Nothing to preview yet. Write something!
+            </p>
+          } @else {
+            <markdown clipboard [data]="form.value.content" />
+          }
+        </article>
+      </div>
     </div>
-    <input
-      type="radio"
-      name="writerTabs"
-      role="tab"
-      class="tab"
-      aria-label="Preview"
-    />
-    <div
-      role="tabpanel"
-      class="tab-content rounded-box border-base-300 bg-base-100 p-6"
+    <button
+      class="btn mt-4 min-w-20 bg-blue-200 font-bold text-sky-800 hover:bg-blue-100 disabled:bg-gray-200"
+      [disabled]="loading"
+      (click)="submit()"
     >
-      <article class="til-markdown prose">
-        @if (!form.value.content?.length) {
-          <p class="text-sm text-gray-400">
-            Nothing to preview yet. Write something!
-          </p>
-        } @else {
-          <markdown clipboard [data]="form.value.content" />
-        }
-      </article>
-    </div>
-  </div>
-  <button
-    class="btn mt-4 min-w-20 bg-blue-200 font-bold text-sky-800 hover:bg-blue-100 disabled:bg-gray-200"
-    [disabled]="loadingSig()"
-    (click)="submit()"
-  >
-    @if (loadingSig()) {
-      <span class="loading loading-spinner loading-xs"></span>
-    } @else {
-      Submit
-    }
-  </button>
-</section>
+      @if (loading) {
+        <span class="loading loading-spinner loading-xs"></span>
+      } @else {
+        Submit
+      }
+    </button>
+  </section>
+</ng-template>

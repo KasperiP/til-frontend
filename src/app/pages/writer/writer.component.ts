@@ -32,7 +32,7 @@ export class WriterComponent implements OnInit, OnDestroy {
   form: FormGroup;
   loadingSig = signal(false);
   errorSig = signal<null | ApiResponse>(null);
-  formSuccess = signal(false);
+  formSuccessSig = signal(false);
   private readonly onDestroy$ = new Subject<void>();
 
   constructor(
@@ -64,7 +64,7 @@ export class WriterComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.onDestroy$),
         tap(() => {
-          this.formSuccess.set(false);
+          this.formSuccessSig.set(false);
           this.errorSig.set(null);
         }),
       )
@@ -79,7 +79,7 @@ export class WriterComponent implements OnInit, OnDestroy {
   submit(): void {
     this.form.markAllAsTouched();
     this.errorSig.set(null);
-    this.formSuccess.set(false);
+    this.formSuccessSig.set(false);
     if (!this.form.valid) return;
     this.loadingSig.set(true);
     this.postsService
@@ -88,11 +88,11 @@ export class WriterComponent implements OnInit, OnDestroy {
         take(1),
         map(() => {
           this.form.reset();
-          this.formSuccess.set(true);
+          this.formSuccessSig.set(true);
         }),
         catchError((e) => {
           this.errorSig.set(e);
-          this.formSuccess.set(false);
+          this.formSuccessSig.set(false);
           return of();
         }),
         finalize(() => this.loadingSig.set(false)),
