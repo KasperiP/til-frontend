@@ -1,5 +1,11 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnInit,
+  PLATFORM_ID,
+} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ThemeService } from './core/services/theme.service';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -10,6 +16,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
   standalone: true,
   imports: [CommonModule, RouterOutlet, FooterComponent, NavbarComponent],
   templateUrl: './app.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
   constructor(

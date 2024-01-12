@@ -22,4 +22,18 @@ export class PostsService {
       .post(`${environment.baseUrl}/api/posts/create`, body)
       .pipe(catchError((e) => this.errorHandlingService.handleError(e)));
   }
+
+  getPosts(limit: number, offset: number): Observable<any> {
+    return this.http
+      .get(
+        `${environment.baseUrl}/api/posts/preview?limit=${limit}&offset=${offset}`,
+      )
+      .pipe(catchError((e) => this.errorHandlingService.handleError(e)));
+  }
+
+  getPost(id: string): Observable<any> {
+    return this.http
+      .get(`${environment.baseUrl}/api/posts/getFull?id=${id}`)
+      .pipe(catchError((e) => this.errorHandlingService.handleError(e)));
+  }
 }

@@ -16,3 +16,15 @@ export interface User {
   authType: SupportedOauthProviders;
   createdAt: Date;
 }
+
+export interface Post extends User {
+  id: number;
+  title: string;
+  content: string;
+  createdAt: Date;
+}
+
+export interface PostPreview {
+  posts: Post[];
+  hasNext: boolean;
+}

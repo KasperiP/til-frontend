@@ -1,1 +1,26 @@
-<p>feed works!</p>
+<ng-container
+  *ngTemplateOutlet="
+    posts;
+    context: {
+      posts: posts$ | async,
+      loading: loadingSig()
+    }
+  "
+/>
+
+<ng-template #posts let-posts="posts" let-loading="loading">
+  <section class="flex flex-col gap-4 px-8 py-20 max-md:px-4">
+    <h2 class="text-4xl font-bold">Feed</h2>
+    @for (item of posts; track $index) {
+      <div class="pg-4 rounded-lg bg-neutral p-4">
+        <h2>{{ item.title }}</h2>
+        <p>{{ item.content }}</p>
+      </div>
+    }
+    @if (loading) {
+      <div class="mt-4 flex justify-center">
+        <span class="loading loading-spinner loading-lg"></span>
+      </div>
+    }
+  </section>
+</ng-template>
