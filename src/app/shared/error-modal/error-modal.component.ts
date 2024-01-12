@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   EventEmitter,
@@ -13,6 +14,7 @@ import {
   imports: [],
   templateUrl: './error-modal.component.html',
   styleUrl: './error-modal.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ErrorModalComponent {
   @Output() closeModal = new EventEmitter<void>();

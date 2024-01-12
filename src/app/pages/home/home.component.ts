@@ -1,6 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   Inject,
   PLATFORM_ID,
@@ -28,6 +29,7 @@ import { LearnedCardsComponent } from './components/learned-cards/learned-cards.
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements AfterViewInit {
   displayErrorModalSig = signal(false);

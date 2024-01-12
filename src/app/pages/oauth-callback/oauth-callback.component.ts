@@ -1,5 +1,11 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnInit,
+  PLATFORM_ID,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, of, take, tap } from 'rxjs';
 import { User } from '../../core/models/api.model';
@@ -13,6 +19,7 @@ import { UserService } from '../../core/services/user.service';
   imports: [],
   templateUrl: './oauth-callback.component.html',
   styleUrl: './oauth-callback.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OauthCallbackComponent implements OnInit {
   constructor(

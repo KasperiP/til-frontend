@@ -7,7 +7,7 @@ import {
   trigger,
 } from '@angular/animations';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'til-learned-cards',
@@ -15,6 +15,7 @@ import { Component } from '@angular/core';
   imports: [CommonModule],
   templateUrl: './learned-cards.component.html',
   styleUrl: './learned-cards.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('hoverAnimation', [
       state('normal', style({ transform: 'translateY(0)' })),

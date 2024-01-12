@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+  signal,
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -27,6 +33,7 @@ import { PostsService } from '../../core/services/posts.service';
   imports: [MarkdownComponent, FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './writer.component.html',
   styleUrl: './writer.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WriterComponent implements OnInit, OnDestroy {
   form: FormGroup;

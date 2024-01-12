@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { tilItems } from './til-items';
 
 @Component({
@@ -7,6 +7,7 @@ import { tilItems } from './til-items';
   imports: [],
   templateUrl: './latest-preview.component.html',
   styleUrl: './latest-preview.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LatestPreviewComponent {
   readonly tilItems = tilItems;

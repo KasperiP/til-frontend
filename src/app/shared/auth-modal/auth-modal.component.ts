@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   EventEmitter,
@@ -17,6 +18,7 @@ import { navButtons } from './nav-buttons';
   imports: [CommonModule],
   templateUrl: './auth-modal.component.html',
   styleUrl: './auth-modal.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthModalComponent {
   @Output() closeModal = new EventEmitter<void>();
