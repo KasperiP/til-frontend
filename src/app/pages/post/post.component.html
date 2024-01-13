@@ -1,0 +1,18 @@
+<ng-container
+  *ngTemplateOutlet="
+    post;
+    context: {
+      post: postSig()
+    }
+  "
+/>
+
+<ng-template #post let-post="post">
+  <section class="px-8 py-20 max-md:px-4">
+    <article class="til-markdown prose">
+      @if (post) {
+        <markdown clipboard [data]="post.content" />
+      }
+    </article>
+  </section>
+</ng-template>

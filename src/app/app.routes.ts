@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
-import { HomeComponent } from './pages/home/home.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
+    loadComponent: () =>
+      import('./pages/home/home.component').then((m) => m.HomeComponent),
   },
   {
     path: 'auth/oauth/:provider/callback',
@@ -32,6 +32,16 @@ export const routes: Routes = [
     path: 'feed',
     loadComponent: () =>
       import('./pages/feed/feed.component').then((m) => m.FeedComponent),
+  },
+  {
+    path: 'feed',
+    loadComponent: () =>
+      import('./pages/feed/feed.component').then((m) => m.FeedComponent),
+  },
+  {
+    path: 'post/:id',
+    loadComponent: () =>
+      import('./pages/post/post.component').then((m) => m.PostComponent),
   },
   {
     path: '**',

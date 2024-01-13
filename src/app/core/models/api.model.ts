@@ -31,6 +31,8 @@ export interface ApiPreviewPost {
   userCreatedAt: Date;
 }
 
+export type ApiPost = ApiPreviewPost;
+
 export interface ApiPreviewPosts {
   posts: ApiPreviewPost[];
   hasMore: boolean;

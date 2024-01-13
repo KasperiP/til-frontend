@@ -1,0 +1,13 @@
+:host {
+  flex: 1;
+}
+
+.til-markdown {
+  @apply prose-custom;
+
+  .language-js {
+    span {
+      font-family: monospace;
+    }
+  }
+}
