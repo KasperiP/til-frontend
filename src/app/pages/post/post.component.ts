@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MarkdownComponent } from 'ngx-markdown';
-import { catchError, filter, of, switchMap, take, tap } from 'rxjs';
+import { catchError, tap } from 'rxjs';
 import { ApiPost } from '../../core/models/api.model';
 import { PostsService } from '../../core/services/posts.service';
 
@@ -30,13 +30,10 @@ export class PostComponent {
   }
 
   private loadPost = () => {
-    this.route.params
+    const id = this.route.snapshot.paramMap.get('id') as string;
+    return this.postsService
+      .getPost(id)
       .pipe(
-        take(1),
-        filter((param) => !!param?.['id']),
-        switchMap((param) => {
-          return this.postsService.getPost(param['id']);
-        }),
         tap((post) => {
           post = post as ApiPost;
           this.postSig.set(post as ApiPost);
@@ -63,8 +60,7 @@ export class PostComponent {
           );
         }),
         catchError(() => {
-          this.router.navigate(['/']);
-          return of();
+          return this.router.navigate(['/']);
         }),
       )
       .subscribe();
