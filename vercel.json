@@ -3,10 +3,5 @@
   "version": 2,
   "public": true,
   "name": "til-frontend",
-  "devCommand": "node dist/til-frontend/server/main.js",
-  "functions": {
-    "api/index.js": {
-      "includeFiles": "dist/til-frontend/**"
-    }
-  }
+  "devCommand": "node dist/til-frontend/server/main.js"
 }
