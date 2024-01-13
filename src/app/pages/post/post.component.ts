@@ -26,6 +26,10 @@ export class PostComponent {
     private readonly meta: Meta,
     private readonly title: Title,
   ) {
+    this.loadPost();
+  }
+
+  private loadPost = () => {
     this.route.params
       .pipe(
         take(1),
@@ -64,5 +68,5 @@ export class PostComponent {
         }),
       )
       .subscribe();
-  }
+  };
 }
