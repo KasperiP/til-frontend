@@ -1,17 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FeedItemComponent } from './feed-item.component';
 
-import { TilItemComponent } from './til-item.component';
-
-describe('TilItemComponent', () => {
-  let component: TilItemComponent;
-  let fixture: ComponentFixture<TilItemComponent>;
+describe('FeedItemComponent', () => {
+  let component: FeedItemComponent;
+  let fixture: ComponentFixture<FeedItemComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TilItemComponent],
+      imports: [FeedItemComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TilItemComponent);
+    fixture = TestBed.createComponent(FeedItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

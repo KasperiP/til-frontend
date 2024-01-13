@@ -10,14 +10,14 @@ import {
 import { ApiPreviewPost } from '../../../../core/models/api.model';
 
 @Component({
-  selector: 'til-til-item',
+  selector: 'til-feed-item',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './til-item.component.html',
-  styleUrl: './til-item.component.scss',
+  templateUrl: './feed-item.component.html',
+  styleUrl: './feed-item.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TilItemComponent implements OnInit {
+export class FeedItemComponent implements OnInit {
   @Input({ required: true }) post!: ApiPreviewPost;
   @Output() loaded = new EventEmitter<number>();
 

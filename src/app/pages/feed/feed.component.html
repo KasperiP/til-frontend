@@ -16,9 +16,9 @@
         @for (post of posts; track post.postId) {
           <article>
             @defer (on viewport) {
-              <til-til-item [post]="post" (loaded)="loaded($event)" />
+              <til-feed-item [post]="post" (loaded)="loaded($event)" />
             } @placeholder {
-              <til-til-item [post]="post" />
+              <til-feed-item [post]="post" />
             }
           </article>
         }

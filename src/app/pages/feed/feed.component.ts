@@ -7,13 +7,13 @@ import {
   ApiPreviewPosts,
 } from '../../core/models/api.model';
 import { PostsService } from '../../core/services/posts.service';
+import { FeedItemComponent } from './components/feed-item/feed-item.component';
 import { FeedMenuComponent } from './components/feed-menu/feed-menu.component';
-import { TilItemComponent } from './components/til-item/til-item.component';
 
 @Component({
   selector: 'til-feed',
   standalone: true,
-  imports: [CommonModule, TilItemComponent, FeedMenuComponent],
+  imports: [CommonModule, FeedItemComponent, FeedMenuComponent],
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
