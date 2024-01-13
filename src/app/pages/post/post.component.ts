@@ -59,7 +59,8 @@ export class PostComponent {
             "property='twitter:image'",
           );
         }),
-        catchError(() => {
+        catchError((e) => {
+          console.error(e);
           return this.router.navigate(['/']);
         }),
       )
