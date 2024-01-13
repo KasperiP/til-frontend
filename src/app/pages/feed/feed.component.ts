@@ -1,9 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { catchError, of, tap } from 'rxjs';
+import {
+  ApiError,
+  ApiPreviewPost,
+  ApiPreviewPosts,
+} from '../../core/models/api.model';
 import { PostsService } from '../../core/services/posts.service';
 import { FeedMenuComponent } from './components/feed-menu/feed-menu.component';
 import { TilItemComponent } from './components/til-item/til-item.component';
-import { Posts } from './models/posts.model';
 
 @Component({
   selector: 'til-feed',
@@ -14,7 +19,7 @@ import { Posts } from './models/posts.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FeedComponent {
-  readonly postsSig = signal<Posts[]>([]);
+  readonly postsSig = signal<ApiPreviewPost[]>([]);
   readonly loadingSig = signal(false);
   private triggerId: number | null = null;
   private hasMore = true;
@@ -33,11 +38,24 @@ export class FeedComponent {
   private loadPosts = (offset = 0) => {
     if (!this.hasMore) return;
     this.loadingSig.set(true);
-    this.postsService.getPosts(this.limit, offset).subscribe((posts) => {
-      this.postsSig.update((oldPosts) => [...oldPosts, ...posts.posts]);
-      this.triggerId = posts.posts[posts.posts.length - 1]?.postId;
-      this.hasMore = posts.hasMore;
-      this.loadingSig.set(false);
-    });
+    this.postsService
+      .getPosts(this.limit, offset)
+      .pipe(
+        tap((posts) => {
+          const postsResponse = posts as ApiPreviewPosts;
+          this.postsSig.update((oldPosts) => [
+            ...oldPosts,
+            ...postsResponse.posts,
+          ]);
+          this.triggerId =
+            postsResponse.posts[postsResponse.posts.length - 1]?.postId;
+          this.hasMore = postsResponse.hasMore;
+          this.loadingSig.set(false);
+        }),
+        catchError((e: ApiError) => {
+          return of(e);
+        }),
+      )
+      .subscribe();
   };
 }

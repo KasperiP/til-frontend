@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError } from 'rxjs';
+import { catchError } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { ApiUser } from '../models/api.model';
 import { SupportedOauthProviders } from '../models/auth.model';
 import { ErrorHandlerService } from './error-handler.service';
 
@@ -14,22 +15,19 @@ export class AuthService {
     private errorHandlingService: ErrorHandlerService,
   ) {}
 
-  loginWithProvider(
-    code: string,
-    provider: SupportedOauthProviders,
-  ): Observable<any> {
+  loginWithProvider(code: string, provider: SupportedOauthProviders) {
     return this.http
-      .post(`${environment.baseUrl}/api/auth/oauth`, {
+      .post<ApiUser>(`${environment.baseUrl}/api/auth/oauth`, {
         code,
         provider,
       })
       .pipe(catchError((e) => this.errorHandlingService.handleError(e)));
   }
 
-  logout(): Observable<any> {
+  logout() {
     localStorage.removeItem('isLoggedIn');
     return this.http
-      .post(`${environment.baseUrl}/api/auth/logout`, {})
+      .post<void>(`${environment.baseUrl}/api/auth/logout`, {})
       .pipe(catchError((e) => this.errorHandlingService.handleError(e)));
   }
 

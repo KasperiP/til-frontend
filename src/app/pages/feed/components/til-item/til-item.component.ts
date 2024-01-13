@@ -7,7 +7,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { Posts } from '../../models/posts.model';
+import { ApiPreviewPost } from '../../../../core/models/api.model';
 
 @Component({
   selector: 'til-til-item',
@@ -18,7 +18,7 @@ import { Posts } from '../../models/posts.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TilItemComponent implements OnInit {
-  @Input({ required: true }) post!: Posts;
+  @Input({ required: true }) post!: ApiPreviewPost;
   @Output() loaded = new EventEmitter<number>();
 
   ngOnInit() {

@@ -24,7 +24,7 @@ import {
   takeUntil,
   tap,
 } from 'rxjs';
-import { ApiResponse } from '../../core/models/api.model';
+import { ApiError } from '../../core/models/api.model';
 import { PostsService } from '../../core/services/posts.service';
 
 @Component({
@@ -38,7 +38,7 @@ import { PostsService } from '../../core/services/posts.service';
 export class WriterComponent implements OnInit, OnDestroy {
   form: FormGroup;
   loadingSig = signal(false);
-  errorSig = signal<null | ApiResponse>(null);
+  errorSig = signal<null | ApiError>(null);
   formSuccessSig = signal(false);
   private readonly onDestroy$ = new Subject<void>();
 
@@ -97,7 +97,7 @@ export class WriterComponent implements OnInit, OnDestroy {
           this.form.reset();
           this.formSuccessSig.set(true);
         }),
-        catchError((e) => {
+        catchError((e: ApiError) => {
           this.errorSig.set(e);
           this.formSuccessSig.set(false);
           return of();

@@ -1,28 +1,28 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, tap } from 'rxjs';
+import { BehaviorSubject, catchError, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { User } from '../models/api.model';
+import { ApiUser } from '../models/api.model';
 import { ErrorHandlerService } from './error-handler.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  readonly user$: BehaviorSubject<User | null> =
-    new BehaviorSubject<User | null>(null);
+  readonly user$: BehaviorSubject<ApiUser | null> =
+    new BehaviorSubject<ApiUser | null>(null);
 
   constructor(
     private http: HttpClient,
     private errorHandlingService: ErrorHandlerService,
   ) {}
 
-  setUser(user: User | null): void {
+  setUser(user: ApiUser | null): void {
     this.user$.next(user);
   }
 
-  getUser(): Observable<User | null> {
-    return this.http.get<User>(`${environment.baseUrl}/api/user/me`).pipe(
+  getUser() {
+    return this.http.get<ApiUser>(`${environment.baseUrl}/api/user/me`).pipe(
       tap((user) => this.setUser(user)),
       catchError((e) => this.errorHandlingService.handleError(e)),
     );

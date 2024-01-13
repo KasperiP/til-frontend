@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, of, take, tap } from 'rxjs';
-import { User } from '../../core/models/api.model';
+import { ApiUser } from '../../core/models/api.model';
 import { SupportedOauthProviders } from '../../core/models/auth.model';
 import { AuthService } from '../../core/services/auth.service';
 import { UserService } from '../../core/services/user.service';
@@ -50,9 +50,10 @@ export class OauthCallbackComponent implements OnInit {
       .loginWithProvider(code, provider)
       .pipe(
         take(1),
-        tap((user: User) => {
+        tap((user) => {
+          const loginResponse = user as ApiUser;
           localStorage.setItem('isLoggedIn', '1');
-          this.userService.setUser(user);
+          this.userService.setUser(loginResponse);
           this.router.navigate(['/']);
         }),
         catchError((e) => {

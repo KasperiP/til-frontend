@@ -1,14 +1,13 @@
 import { SupportedOauthProviders } from './auth.model';
 
-export interface ApiResponse<T = void> {
-  status: number;
+export interface ApiError<T = void> {
   code: string;
-  isError: boolean;
   message?: string;
+  isError: boolean;
   data?: T;
 }
 
-export interface User {
+export interface ApiUser {
   id: number;
   name: string;
   email: string;
@@ -17,15 +16,22 @@ export interface User {
   createdAt: Date;
 }
 
-export interface Post extends User {
+export interface ApiPreviewPost {
   postId: number;
   title: string;
   content: string;
-  postCreatedAt: Date;
   tags: string[];
+  postCreatedAt: Date;
+  userId: number;
+  name: string;
+  email: string;
+  image: string;
+  authType: SupportedOauthProviders;
+  authId: string;
+  userCreatedAt: Date;
 }
 
-export interface PostPreview {
-  posts: Post[];
-  hasNext: boolean;
+export interface ApiPreviewPosts {
+  posts: ApiPreviewPost[];
+  hasMore: boolean;
 }
