@@ -1,3 +1,4 @@
 tailwind.config.js
 proxy.conf.js
 pnpm-lock.yaml
+api/index.js
