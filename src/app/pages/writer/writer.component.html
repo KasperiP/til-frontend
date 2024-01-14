@@ -114,6 +114,56 @@
               </span>
             </label>
           </label>
+          <label class="form-control mb-4 w-full max-w-xs max-md:max-w-full">
+            <div class="label">
+              <span class="label-text"
+                >Description
+                <span class="text-gray-400">
+                  ({{ form.value.description?.length ?? 0 }} / 250)
+                </span>
+              </span>
+              <span
+                class="tooltip before:text-typography-primary"
+                data-tip="Description is displayed on the feed. It should be short and
+                concise to attract readers. Do not put actual content here."
+              >
+                <span
+                  class="flex h-5 w-5 items-center justify-center rounded-full bg-blue-200 p-1 text-sm font-bold"
+                  >?</span
+                >
+              </span>
+            </div>
+            <input
+              maxlength="50"
+              formControlName="description"
+              type="text"
+              placeholder="Type here"
+              class="input input-bordered w-full max-w-xs max-md:max-w-full"
+              [ngClass]="{
+                'input-error':
+                  form.controls['description'].touched &&
+                  form.controls['description'].invalid
+              }"
+            />
+            <label
+              *ngIf="
+                form.controls['description'].touched &&
+                form.controls['description'].invalid
+              "
+              class="label"
+              for="description"
+            >
+              <span class="label-text-alt text-error">
+                {{
+                  form.controls['description'].errors?.['required']
+                    ? 'Description is required'
+                    : form.controls['description'].errors?.['maxlength']
+                      ? 'Description is too long. Max 250 characters'
+                      : 'Description is too short. Min 10 characters'
+                }}
+              </span>
+            </label>
+          </label>
           <label class="form-control">
             <div class="label">
               <span class="label-text"
@@ -122,6 +172,15 @@
                   ({{ form.value.content?.length ?? 0 }} / 5000)
                 </span></span
               >
+              <span
+                class="tooltip tooltip-left before:text-typography-primary"
+                data-tip="Content supports Markdown. You can use it to format your post. Good post should have a markdown title."
+              >
+                <span
+                  class="flex h-5 w-5 items-center justify-center rounded-full bg-blue-200 p-1 text-sm font-bold"
+                  >?</span
+                >
+              </span>
             </div>
             <textarea
               rows="6"
@@ -149,7 +208,7 @@
                     ? 'Content is required'
                     : form.controls['content'].errors?.['maxlength']
                       ? 'Content is too long. Max 5000 characters'
-                      : 'Content is too short. Min 30 characters'
+                      : 'Content is too short. Min 10 characters'
                 }}
               </span>
             </label>
@@ -166,7 +225,7 @@
         name="writerTabs"
         role="tab"
         class="tab"
-        aria-label="Preview"
+        aria-label="Preview content"
       />
       <div
         role="tabpanel"

@@ -62,11 +62,19 @@ export class WriterComponent implements OnInit, OnDestroy {
           Validators.maxLength(50),
         ],
       ],
+      description: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(250),
+        ],
+      ],
       content: [
         '',
         [
           Validators.required,
-          Validators.minLength(30),
+          Validators.minLength(10),
           Validators.maxLength(5000),
         ],
       ],

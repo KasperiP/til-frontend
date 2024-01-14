@@ -19,17 +19,17 @@ export interface ApiUser {
 export interface ApiPreviewPost {
   postId: number;
   title: string;
-  content: string;
+  description: string;
   tags: string[];
   postCreatedAt: Date;
   userId: number;
   name: string;
-  email: string;
   image: string;
-  authType: SupportedOauthProviders;
-  authId: string;
-  userCreatedAt: Date;
   likes: number;
+}
+
+export interface ApiFullPost extends ApiPreviewPost {
+  content: string;
 }
 
 export type ApiPost = ApiPreviewPost;
