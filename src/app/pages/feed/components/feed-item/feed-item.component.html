@@ -23,7 +23,7 @@
       {{ post.postCreatedAt | date: 'dd/MM/yyyy' }}
     </p>
     <span class="text-center opacity-60">·</span>
-    <p class="text-sm opacity-60">1 likes</p>
+    <p class="text-sm opacity-60">{{ post.likes }} likes</p>
     <div class="flex flex-wrap gap-2">
       @for (tag of post.tags; track $index) {
         <div class="badge">

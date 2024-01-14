@@ -29,6 +29,7 @@ export interface ApiPreviewPost {
   authType: SupportedOauthProviders;
   authId: string;
   userCreatedAt: Date;
+  likes: number;
 }
 
 export type ApiPost = ApiPreviewPost;
