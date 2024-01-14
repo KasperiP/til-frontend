@@ -1,35 +1,37 @@
-<div class="rounded-lg bg-neutral p-4">
-  <div class="flex flex-col gap-4">
-    <div class="flex items-center gap-4">
-      <div class="avatar">
-        <div class="w-12 rounded-full">
-          <img alt="Avatar" [src]="post.image" />
+<a class="cursor-pointer" [routerLink]="['/post', post.postId]">
+  <div class="rounded-lg bg-neutral p-4">
+    <div class="flex flex-col gap-4">
+      <div class="flex items-center gap-4">
+        <div class="avatar">
+          <div class="w-12 rounded-full">
+            <img alt="Avatar" [src]="post.image" />
+          </div>
+        </div>
+        <div class="flex flex-col overflow-auto">
+          <h3 class="truncate font-bold">
+            {{ post.title }}
+          </h3>
+          <p class="truncate text-sm text-gray-500">by {{ post.name }}</p>
         </div>
       </div>
-      <div class="flex flex-col overflow-auto">
-        <h3 class="truncate font-bold">
-          {{ post.title }}
-        </h3>
-        <p class="truncate text-sm text-gray-500">by {{ post.name }}</p>
+      <p class="text-sm">
+        {{ post.description }}
+      </p>
+    </div>
+    <div class="divider my-1"></div>
+    <div class="flex items-center gap-2">
+      <p class="text-sm">
+        {{ post.postCreatedAt | date: 'dd/MM/yyyy' }}
+      </p>
+      <span class="text-center opacity-60">·</span>
+      <p class="text-sm opacity-60">{{ post.likes }} likes</p>
+      <div class="flex flex-wrap gap-2">
+        @for (tag of post.tags; track $index) {
+          <div class="badge">
+            {{ tag }}
+          </div>
+        }
       </div>
     </div>
-    <p class="text-sm">
-      {{ post.description }}
-    </p>
   </div>
-  <div class="divider my-1"></div>
-  <div class="flex items-center gap-2">
-    <p class="text-sm">
-      {{ post.postCreatedAt | date: 'dd/MM/yyyy' }}
-    </p>
-    <span class="text-center opacity-60">·</span>
-    <p class="text-sm opacity-60">{{ post.likes }} likes</p>
-    <div class="flex flex-wrap gap-2">
-      @for (tag of post.tags; track $index) {
-        <div class="badge">
-          {{ tag }}
-        </div>
-      }
-    </div>
-  </div>
-</div>
+</a>

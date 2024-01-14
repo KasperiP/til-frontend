@@ -58,11 +58,30 @@ export class PostComponent {
             { name: 'twitter:image', content: ogUrl.toString() },
             "property='twitter:image'",
           );
+          this.meta.updateTag(
+            {
+              name: 'og:url',
+              content: `https://til.kassq.dev/post/${post.postId}`,
+            },
+            "property='og:url'",
+          );
+          this.meta.updateTag(
+            {
+              name: 'twitter:url',
+              content: `https://til.kassq.dev/post/${post.postId}`,
+            },
+            "property='twitter:url'",
+          );
+          this.meta.updateTag(
+            { name: 'og:title', content: post.title },
+            "property='og:title'",
+          );
+          this.meta.updateTag(
+            { name: 'twitter:title', content: post.title },
+            "property='twitter:title'",
+          );
         }),
-        catchError((e) => {
-          console.error(e);
-          return this.router.navigate(['/']);
-        }),
+        catchError(() => this.router.navigate(['/'])),
       )
       .subscribe();
   };

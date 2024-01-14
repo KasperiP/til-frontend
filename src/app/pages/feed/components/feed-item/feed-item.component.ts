@@ -7,12 +7,13 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { ApiPreviewPost } from '../../../../core/models/api.model';
 
 @Component({
   selector: 'til-feed-item',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './feed-item.component.html',
   styleUrl: './feed-item.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
