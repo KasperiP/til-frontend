@@ -1,4 +1,3 @@
-//
-const server = require('../dist/til-frontend/server/main');
+import * as server from '../dist/til-frontend/server/server.mjs';
 
-module.exports = server.app();
+export default server.app();
