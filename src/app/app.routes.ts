@@ -6,6 +6,7 @@ export const routes: Routes = [
     path: '',
     loadComponent: () =>
       import('./pages/home/home.component').then((m) => m.HomeComponent),
+    title: 'Today I Learned — Share what you learned today',
   },
   {
     path: 'auth/oauth/:provider/callback',
@@ -13,6 +14,7 @@ export const routes: Routes = [
       import('./pages/oauth-callback/oauth-callback.component').then(
         (m) => m.OauthCallbackComponent,
       ),
+    title: 'Authenticating...',
   },
   {
     path: 'profile',
@@ -21,22 +23,22 @@ export const routes: Routes = [
         (m) => m.ProfileComponent,
       ),
     canActivate: [authGuard],
+    title: 'Profile',
   },
   {
-    path: 'writer',
+    path: 'new-post',
     loadComponent: () =>
-      import('./pages/writer/writer.component').then((m) => m.WriterComponent),
+      import('./pages/new-post/new-post.component').then(
+        (m) => m.NewPostComponent,
+      ),
     canActivate: [authGuard],
+    title: 'Write a post',
   },
   {
     path: 'feed',
     loadComponent: () =>
       import('./pages/feed/feed.component').then((m) => m.FeedComponent),
-  },
-  {
-    path: 'feed',
-    loadComponent: () =>
-      import('./pages/feed/feed.component').then((m) => m.FeedComponent),
+    title: 'Feed',
   },
   {
     path: 'post/:id',

@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WriterComponent } from './writer.component';
+import { NewPostComponent } from './new-post.component';
 
-describe('WriterComponent', () => {
-  let component: WriterComponent;
-  let fixture: ComponentFixture<WriterComponent>;
+describe('NewPostComponent', () => {
+  let component: NewPostComponent;
+  let fixture: ComponentFixture<NewPostComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [WriterComponent],
+      imports: [NewPostComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(WriterComponent);
+    fixture = TestBed.createComponent(NewPostComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

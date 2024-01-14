@@ -1,6 +1,6 @@
 <ng-container
   *ngTemplateOutlet="
-    writer;
+    postContainer;
     context: {
       error: errorSig(),
       loading: loadingSig(),
@@ -10,7 +10,7 @@
 />
 
 <ng-template
-  #writer
+  #postContainer
   let-error="error"
   let-loading="loading"
   let-formSuccess="formSuccess"
@@ -64,7 +64,7 @@
     <div role="tablist" class="tabs tabs-lifted mt-4">
       <input
         type="radio"
-        name="writerTabs"
+        name="postTabs"
         role="tab"
         class="tab"
         aria-label="Write"
@@ -222,7 +222,7 @@
       </div>
       <input
         type="radio"
-        name="writerTabs"
+        name="postTabs"
         role="tab"
         class="tab"
         aria-label="Preview content"

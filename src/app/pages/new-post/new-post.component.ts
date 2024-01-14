@@ -29,7 +29,7 @@ import { PostsService } from '../../core/services/posts.service';
 import { TagsInputComponent } from '../../shared/tags-input/tags-input.component';
 
 @Component({
-  selector: 'til-writer',
+  selector: 'til-new-post',
   standalone: true,
   imports: [
     MarkdownComponent,
@@ -38,11 +38,11 @@ import { TagsInputComponent } from '../../shared/tags-input/tags-input.component
     CommonModule,
     TagsInputComponent,
   ],
-  templateUrl: './writer.component.html',
-  styleUrl: './writer.component.scss',
+  templateUrl: './new-post.component.html',
+  styleUrl: './new-post.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WriterComponent implements OnInit, OnDestroy {
+export class NewPostComponent implements OnInit, OnDestroy {
   form: FormGroup;
   loadingSig = signal(false);
   errorSig = signal<null | ApiError>(null);
