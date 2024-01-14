@@ -44,9 +44,6 @@ dependencies:
   express:
     specifier: ^4.18.2
     version: 4.18.2
-  highlight.js:
-    specifier: ^11.9.0
-    version: 11.9.0
   marked:
     specifier: ^9.1.6
     version: 9.1.6
@@ -5746,11 +5743,6 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
-
-  /highlight.js@11.9.0:
-    resolution: {integrity: sha512-fJ7cW7fQGCYAkgv4CPfwFHrfd/cLS4Hau96JuJ+ZTOWhjnhoeN1ub1tFmALm/+lW5z4WCAuAV9bm05AP0mS6Gw==}
-    engines: {node: '>=12.0.0'}
-    dev: false
 
   /hosted-git-info@7.0.1:
     resolution: {integrity: sha512-+K84LB1DYwMHoHSgaOY/Jfhw3ucPmSET5v98Ke/HdNSw4a0UktWzyW1mjhjpuxxTqOOsfWT/7iVshHmVZ4IpOA==}
