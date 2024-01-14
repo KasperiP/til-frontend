@@ -154,6 +154,11 @@
               </span>
             </label>
           </label>
+          <til-tags-input
+            class="mt-4 block"
+            [tagsIn]="form.controls['tags'].value"
+            (tags)="handleTags($event)"
+          />
         </form>
       </div>
       <input

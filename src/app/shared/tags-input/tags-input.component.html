@@ -1,0 +1,52 @@
+<ng-container
+  *ngTemplateOutlet="
+    tagsContainer;
+    context: {
+      tags: tagsSig()
+    }
+  "
+/>
+
+<ng-template #tagsContainer let-tags="tags">
+  <div class="label">
+    <span class="label-text"
+      >What you have learned
+      <span class="text-gray-400"> ({{ tags?.length ?? 0 }} / 3) </span></span
+    >
+  </div>
+  <div class="join">
+    <label class="form-control">
+      <input
+        class="input join-item input-bordered"
+        placeholder="Write a tag"
+        [formControl]="tagsControl"
+      />
+      <label
+        *ngIf="tagsControl.touched && tagsControl.invalid"
+        class="label"
+        for="content"
+      >
+        <span class="label-text-alt text-error">
+          {{
+            tagsControl.errors?.['minlength']
+              ? 'Tag is too short. Min 3 characters'
+              : 'Tag is too long. Max 20 characters'
+          }}
+        </span>
+      </label>
+    </label>
+    <button class="btn join-item rounded-r-lg" (click)="addTag()">Add</button>
+  </div>
+  @if (tags?.length) {
+    <div class="mt-4 flex flex-wrap gap-2 rounded-lg bg-neutral p-4">
+      @for (tag of tags; track $index) {
+        <span class="badge badge-primary badge-lg border-1 border-[#d2d4d7]">
+          <span class="badge-content">{{ tag }}</span>
+          <button class="btn btn-ghost btn-xs ml-2" (click)="removeTag(tag)">
+            x
+          </button>
+        </span>
+      }
+    </div>
+  }
+</ng-template>

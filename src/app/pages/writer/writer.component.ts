@@ -26,11 +26,18 @@ import {
 } from 'rxjs';
 import { ApiError } from '../../core/models/api.model';
 import { PostsService } from '../../core/services/posts.service';
+import { TagsInputComponent } from '../../shared/tags-input/tags-input.component';
 
 @Component({
   selector: 'til-writer',
   standalone: true,
-  imports: [MarkdownComponent, FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [
+    MarkdownComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
+    TagsInputComponent,
+  ],
   templateUrl: './writer.component.html',
   styleUrl: './writer.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -63,6 +70,7 @@ export class WriterComponent implements OnInit, OnDestroy {
           Validators.maxLength(5000),
         ],
       ],
+      tags: [[]],
     });
   }
 
@@ -81,6 +89,10 @@ export class WriterComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.onDestroy$.next();
     this.onDestroy$.complete();
+  }
+
+  handleTags(tags: string[]) {
+    this.form.get('tags')?.setValue(tags);
   }
 
   submit(): void {
