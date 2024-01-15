@@ -12,6 +12,7 @@ import { SupportedOauthProviders } from '../../core/models/auth.model';
 import { ErrorModalComponent } from '../../shared/error-modal/error-modal.component';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { AboutComponent } from './components/about/about.component';
+import { FaqComponent } from './components/faq/faq.component';
 import { HeroComponent } from './components/hero/hero.component';
 import { LatestPreviewComponent } from './components/latest-preview/latest-preview.component';
 import { LearnedCardsComponent } from './components/learned-cards/learned-cards.component';
@@ -26,6 +27,7 @@ import { LearnedCardsComponent } from './components/learned-cards/learned-cards.
     LearnedCardsComponent,
     LatestPreviewComponent,
     ErrorModalComponent,
+    FaqComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
