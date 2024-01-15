@@ -39,7 +39,7 @@ export class TagsInputComponent {
 
   addTag() {
     if (this.tagsControl.invalid) return;
-    const tag = this.tagsControl.value.trim();
+    const tag = this.tagsControl.value?.trim()?.toLowerCase();
     if (!tag) return;
     const tags = this.tagsSig();
     if (tags.includes(tag) || tags.length === 3) return;
