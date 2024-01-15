@@ -18,6 +18,14 @@ export function app(): express.Express {
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);
 
+  // Sitemap.xml
+  server.get('/sitemap.xml', async (req, res) => {
+    const sitemap = await fetch(`https://api.learnedtoday.app/api/sitemap`);
+    const text = await sitemap.text();
+    res.setHeader('Content-Type', 'application/xml');
+    res.send(text);
+  });
+
   // Example Express Rest API endpoints
   // server.get('/api/**', (req, res) => { });
   // Serve static files from /browser
