@@ -19,6 +19,7 @@ import { PostsService } from '../../core/services/posts.service';
 })
 export class PostComponent {
   postSig = signal<ApiPost | null>(null);
+  loadingSig = signal<boolean>(true);
 
   constructor(
     private route: ActivatedRoute,
@@ -41,6 +42,7 @@ export class PostComponent {
           this.title.setTitle(
             `${post.title} | by ${post.name} | Today I Learned`,
           );
+          this.loadingSig.set(false);
           this.updateMetaTags(post);
         }),
         catchError(() => this.router.navigate(['/'])),
