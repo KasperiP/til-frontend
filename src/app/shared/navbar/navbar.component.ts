@@ -1,10 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { take } from 'rxjs';
 import { AuthService } from '../../core/services/auth.service';
@@ -19,7 +14,7 @@ import { AuthModalComponent } from '../auth-modal/auth-modal.component';
   styleUrl: './navbar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
   showAuthModalSig = signal(false);
   user$ = this.userService.user$;
 
@@ -27,7 +22,9 @@ export class NavbarComponent implements OnInit {
     private readonly authService: AuthService,
     private readonly userService: UserService,
     private readonly router: Router,
-  ) {}
+  ) {
+    this.loadUser();
+  }
 
   logout(): void {
     this.userService.clearUser();
@@ -43,10 +40,7 @@ export class NavbarComponent implements OnInit {
     (document.activeElement as any)?.blur();
   }
 
-  ngOnInit(): void {
-    const user = this.user$.value;
-    if (!user) {
-      this.userService.getUser().pipe(take(1)).subscribe();
-    }
+  private loadUser() {
+    this.userService.getUser().pipe(take(1)).subscribe();
   }
 }
