@@ -40,7 +40,7 @@
               "node_modules/clipboard/dist/clipboard.min.js"
             ],
             "server": "src/main.server.ts",
-            "prerender": false,
+            "prerender": true,
             "ssr": {
               "entry": "server.ts"
             }
