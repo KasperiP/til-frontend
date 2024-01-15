@@ -39,8 +39,13 @@
   </div>
   @if (tags?.length) {
     <div class="mt-4 flex flex-wrap gap-2 rounded-lg bg-neutral p-4">
-      @for (tag of tags; track $index) {
-        <span class="badge badge-primary badge-lg border-1 border-[#d2d4d7]">
+      @for (tag of tags; track i; let i = $index) {
+        <span
+          class="badge badge-lg border-1 border-divider"
+          [ngClass]="
+            i === 0 ? 'bg-blue-200' : i === 1 ? 'bg-pink-200' : 'bg-green-200'
+          "
+        >
           <span class="badge-content">{{ tag }}</span>
           <button class="btn btn-ghost btn-xs ml-2" (click)="removeTag(tag)">
             x
