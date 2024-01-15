@@ -49,7 +49,7 @@ export class PostComponent {
   };
 
   private updateMetaTags(post: ApiPost) {
-    const ogUrl = new URL('https://og.til.kassq.dev/api/og');
+    const ogUrl = new URL('https://og.learnedtoday.app/api/og');
     ogUrl.searchParams.append('title', post.title);
     ogUrl.searchParams.append('author', post.name);
     ogUrl.searchParams.append(
@@ -61,10 +61,13 @@ export class PostComponent {
     const tags = [
       { name: 'og:image', content: ogUrl.toString() },
       { name: 'twitter:image', content: ogUrl.toString() },
-      { name: 'og:url', content: `https://til.kassq.dev/post/${post.postId}` },
+      {
+        name: 'og:url',
+        content: `https://learnedtoday.app/post/${post.postId}`,
+      },
       {
         name: 'twitter:url',
-        content: `https://til.kassq.dev/post/${post.postId}`,
+        content: `https://learnedtoday.app/post/${post.postId}`,
       },
       { name: 'og:title', content: post.title },
       { name: 'twitter:title', content: post.title },
