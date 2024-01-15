@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { ApiStatistics, ApiUser } from '../models/api.model';
+import { ApiUser, ApiUserStatistics } from '../models/api.model';
 import { ErrorHandlerService } from './error-handler.service';
 
 @Injectable({
@@ -28,9 +28,9 @@ export class UserService {
     );
   }
 
-  getStatistics() {
+  getUserStatistics() {
     return this.http
-      .get<ApiStatistics>(`${environment.baseUrl}/api/user/statistics`)
+      .get<ApiUserStatistics>(`${environment.baseUrl}/api/user/statistics`)
       .pipe(catchError((e) => this.errorHandlingService.handleError(e)));
   }
 

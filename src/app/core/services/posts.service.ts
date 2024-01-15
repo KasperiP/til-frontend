@@ -2,7 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { ApiPost, ApiPreviewPosts, ApiUser } from '../models/api.model';
+import {
+  ApiPost,
+  ApiPreviewPosts,
+  ApiStatistics,
+  ApiUser,
+} from '../models/api.model';
 import { ErrorHandlerService } from './error-handler.service';
 
 @Injectable({
@@ -28,6 +33,12 @@ export class PostsService {
       .get<ApiPreviewPosts>(
         `${environment.baseUrl}/api/posts/preview?limit=${limit}&offset=${offset}`,
       )
+      .pipe(catchError((e) => this.errorHandlingService.handleError(e)));
+  }
+
+  getStatistics() {
+    return this.http
+      .get<ApiStatistics>(`${environment.baseUrl}/api/posts/statistics`)
       .pipe(catchError((e) => this.errorHandlingService.handleError(e)));
   }
 

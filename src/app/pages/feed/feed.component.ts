@@ -6,6 +6,7 @@ import {
   ApiPreviewPost,
   ApiPreviewPosts,
   ApiStatistics,
+  ApiUserStatistics,
 } from '../../core/models/api.model';
 import { PostsService } from '../../core/services/posts.service';
 import { UserService } from '../../core/services/user.service';
@@ -22,8 +23,11 @@ import { FeedMenuComponent } from './components/feed-menu/feed-menu.component';
 })
 export class FeedComponent {
   readonly postsSig = signal<ApiPreviewPost[]>([]);
-  readonly statsSig = signal<ApiStatistics | null>(null);
-  readonly loadingSig = signal(false);
+  readonly userStatsSig = signal<ApiUserStatistics | null>(null);
+  readonly globalStatsSig = signal<ApiStatistics | null>(null);
+  readonly loadingPostsSig = signal(false);
+  readonly loadingUserStatsSig = signal(false);
+  readonly loadingGlobalStatsSig = signal(false);
   private triggerId: number | null = null;
   private hasMore = true;
   private readonly limit = 10;
@@ -44,7 +48,7 @@ export class FeedComponent {
 
   private loadPosts = (offset = 0) => {
     if (!this.hasMore) return;
-    this.loadingSig.set(true);
+    this.loadingPostsSig.set(true);
     this.postsService
       .getPosts(this.limit, offset)
       .pipe(
@@ -57,7 +61,7 @@ export class FeedComponent {
           this.triggerId =
             postsResponse.posts[postsResponse.posts.length - 1]?.postId;
           this.hasMore = postsResponse.hasMore;
-          this.loadingSig.set(false);
+          this.loadingPostsSig.set(false);
         }),
         catchError((e: ApiError) => {
           return of(e);
@@ -67,13 +71,28 @@ export class FeedComponent {
   };
 
   private loadStats() {
+    this.loadingUserStatsSig.set(true);
+    this.loadingGlobalStatsSig.set(true);
     this.userService
+      .getUserStatistics()
+      .pipe(
+        take(1),
+        tap((res) => {
+          if ('isError' in res) return;
+          this.userStatsSig.set(res);
+          this.loadingUserStatsSig.set(false);
+        }),
+      )
+      .subscribe();
+
+    this.postsService
       .getStatistics()
       .pipe(
         take(1),
         tap((res) => {
           if ('isError' in res) return;
-          this.statsSig.set(res);
+          this.globalStatsSig.set(res);
+          this.loadingGlobalStatsSig.set(false);
         }),
       )
       .subscribe();

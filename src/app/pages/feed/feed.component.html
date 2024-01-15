@@ -3,13 +3,24 @@
     posts;
     context: {
       posts: postsSig(),
-      loading: loadingSig(),
-      stats: statsSig()
+      loadingPosts: loadingPostsSig(),
+      loadingUserStats: loadingUserStatsSig(),
+      loadingGlobalStats: loadingGlobalStatsSig(),
+      userStats: userStatsSig(),
+      globalStats: globalStatsSig()
     }
   "
 />
 
-<ng-template #posts let-posts="posts" let-loading="loading" let-stats="stats">
+<ng-template
+  #posts
+  let-posts="posts"
+  let-loadingPosts="loadingPosts"
+  let-loadingUserStats="loadingUserStats"
+  let-loadingGlobalStats="loadingGlobalStats"
+  let-userStats="userStats"
+  let-globalStats="globalStats"
+>
   <section class="flex flex-col gap-4 px-8 py-20 max-md:px-4">
     <h2 class="text-4xl font-bold">Feed</h2>
     <div class="flex gap-4">
@@ -23,7 +34,7 @@
             }
           </article>
         }
-        @if (loading) {
+        @if (loadingPosts) {
           <div class="mt-4 flex flex-col items-center justify-center gap-2">
             <span
               class="loading loading-spinner loading-lg bg-typography-primary"
@@ -32,7 +43,13 @@
           </div>
         }
       </div>
-      <til-feed-menu class="max-lg:hidden" [stats]="stats" />
+      <til-feed-menu
+        class="max-lg:hidden"
+        [loadingUserStats]="loadingUserStats"
+        [loadingGlobalStats]="loadingGlobalStats"
+        [userStats]="userStats"
+        [globalStats]="globalStats"
+      />
     </div>
   </section>
 </ng-template>

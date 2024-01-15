@@ -29,10 +29,13 @@ export interface ApiPreviewPost {
   readTime: number;
 }
 
-export interface ApiStatistics {
+export interface ApiUserStatistics {
   userPosts: number;
   userLikes: number;
   userStreak: number;
+}
+
+export interface ApiStatistics {
   totalPosts: number;
   postsLastWeek: number;
 }
