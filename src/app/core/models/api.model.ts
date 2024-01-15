@@ -26,6 +26,15 @@ export interface ApiPreviewPost {
   name: string;
   image: string;
   likes: number;
+  readTime: number;
+}
+
+export interface ApiStatistics {
+  userPosts: number;
+  userLikes: number;
+  userStreak: number;
+  totalPosts: number;
+  postsLastWeek: number;
 }
 
 export interface ApiFullPost extends ApiPreviewPost {

@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ApiStatistics } from '../../../../core/models/api.model';
 
 @Component({
   selector: 'til-feed-menu',
@@ -8,4 +9,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './feed-menu.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FeedMenuComponent {}
+export class FeedMenuComponent {
+  @Input() stats: ApiStatistics | null = null;
+}

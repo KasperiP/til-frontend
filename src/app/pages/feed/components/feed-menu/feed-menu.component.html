@@ -1,21 +1,34 @@
-<aside class="sticky top-16 h-screen w-[350px] flex-shrink-0">
-  <h3 class="mb-2 text-2xl font-bold">Your statistics</h3>
-  <div class="flex flex-col gap-4">
-    <div class="rounded-lg bg-blue-200 p-4">
-      <h2 class="text-4xl font-bold">2 day</h2>
-      <p class="text-xl font-bold">Learning streak</p>
+<aside #menu class="sticky top-20 flex w-[350px] flex-col gap-6">
+  <div class="rounded-lg border-1 border-divider p-4 shadow-lg">
+    <h3 class="mb-4 text-2xl font-bold">Your statistics</h3>
+    <div class="flex flex-col gap-4">
+      <div
+        class="rounded-lg border-1 border-dashed border-blue-400 bg-blue-200 p-4"
+      >
+        <h2 class="text-2xl font-bold">{{ stats?.userPosts ?? 'N/A' }}</h2>
+        <p>Written posts</p>
+      </div>
+      <div
+        class="rounded-lg border-1 border-dashed border-green-600 bg-green-200 p-4"
+      >
+        <h2 class="text-2xl font-bold">{{ stats?.userStreak ?? 'N/A' }}</h2>
+        <p>Current streak</p>
+      </div>
+      <div
+        class="rounded-lg border-1 border-dashed border-pink-300 bg-pink-200 p-4"
+      >
+        <h2 class="text-2xl font-bold">{{ stats?.userLikes ?? 'N/A' }}</h2>
+        <p>Received likes</p>
+      </div>
     </div>
-    <div class="rounded-lg bg-blue-200 p-4">
-      <h2 class="text-4xl font-bold">2 day</h2>
-      <p class="text-xl font-bold">Learning streak</p>
-    </div>
-    <div class="rounded-lg bg-blue-200 p-4">
-      <h2 class="text-4xl font-bold">2 day</h2>
-      <p class="text-xl font-bold">Learning streak</p>
-    </div>
-    <div class="rounded-lg bg-blue-200 p-4">
-      <h2 class="text-4xl font-bold">2 day</h2>
-      <p class="text-xl font-bold">Learning streak</p>
+  </div>
+  <div class="rounded-lg border-1 border-divider p-4 shadow-lg">
+    <h3 class="mb-4 text-2xl font-bold">Other</h3>
+    <div class="flex flex-col gap-4">
+      <div class="rounded-lg bg-neutral p-4">
+        <h2 class="text-2xl font-bold">{{ stats?.postsLastWeek ?? 'N/A' }}</h2>
+        <p>Posts last 7 days</p>
+      </div>
     </div>
   </div>
 </aside>

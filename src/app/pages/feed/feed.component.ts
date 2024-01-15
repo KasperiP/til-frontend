@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { catchError, of, tap } from 'rxjs';
+import { catchError, of, take, tap } from 'rxjs';
 import {
   ApiError,
   ApiPreviewPost,
   ApiPreviewPosts,
+  ApiStatistics,
 } from '../../core/models/api.model';
 import { PostsService } from '../../core/services/posts.service';
+import { UserService } from '../../core/services/user.service';
 import { FeedItemComponent } from './components/feed-item/feed-item.component';
 import { FeedMenuComponent } from './components/feed-menu/feed-menu.component';
 
@@ -20,13 +22,18 @@ import { FeedMenuComponent } from './components/feed-menu/feed-menu.component';
 })
 export class FeedComponent {
   readonly postsSig = signal<ApiPreviewPost[]>([]);
+  readonly statsSig = signal<ApiStatistics | null>(null);
   readonly loadingSig = signal(false);
   private triggerId: number | null = null;
   private hasMore = true;
   private readonly limit = 10;
 
-  constructor(private readonly postsService: PostsService) {
+  constructor(
+    private readonly postsService: PostsService,
+    private readonly userService: UserService,
+  ) {
     this.loadPosts();
+    this.loadStats();
   }
 
   loaded(id: number) {
@@ -58,4 +65,17 @@ export class FeedComponent {
       )
       .subscribe();
   };
+
+  private loadStats() {
+    this.userService
+      .getStatistics()
+      .pipe(
+        take(1),
+        tap((res) => {
+          if ('isError' in res) return;
+          this.statsSig.set(res);
+        }),
+      )
+      .subscribe();
+  }
 }
