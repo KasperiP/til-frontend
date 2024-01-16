@@ -13,6 +13,15 @@
       "type": "image/png"
     }
   ],
+  "screenshots": [
+    {
+      "src": "/assets/favicon/screenshot.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Today I Learned showcase"
+    }
+  ],
   "theme_color": "#ffffff",
   "background_color": "#ffffff",
   "display": "standalone",
