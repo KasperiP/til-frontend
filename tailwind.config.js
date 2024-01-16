@@ -9,6 +9,7 @@ module.exports = {
           css: {
             '--tw-prose-headings': theme('colors.typography.primary'),
             '--tw-prose-links': theme('colors.sky.800'),
+            '--tw-prose-bold': theme('colors.typography.primary'),
           },
         },
       }),
