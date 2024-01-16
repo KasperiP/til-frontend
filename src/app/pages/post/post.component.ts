@@ -123,6 +123,8 @@ export class PostComponent implements OnInit, OnDestroy {
       { name: 'twitter:title', content: post.title },
       { name: 'og:description', content: post.description },
       { name: 'twitter:description', content: post.description },
+      { name: 'og:type', content: 'article' },
+      { name: 'keywords', content: post.tags.join(', ') },
     ];
 
     tags.forEach((tag) => this.meta.updateTag(tag, `property='${tag.name}'`));
