@@ -1,3 +1,5 @@
 /
 /new-post
 /profile
+/legal/privacy-policy
+/legal/terms-of-service
