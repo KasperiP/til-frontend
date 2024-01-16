@@ -8,4 +8,5 @@ export const environment = {
   githubRedirectUri: 'https://learnedtoday.app/auth/oauth/github/callback',
   linkedinClientId: '77mc358dc7r7to',
   linkedinRedirectUri: 'https://learnedtoday.app/auth/oauth/linkedin/callback',
+  googleAnalyticsTrackingCode: 'G-SW145JPX3Y',
 };

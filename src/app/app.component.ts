@@ -10,12 +10,19 @@ import {
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { Subject, filter, takeUntil } from 'rxjs';
 import { FooterComponent } from './shared/footer/footer.component';
+import { GoogleAnalyticsComponent } from './shared/google-analytics/google-analytics.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 
 @Component({
   selector: 'til-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, FooterComponent, NavbarComponent],
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    FooterComponent,
+    NavbarComponent,
+    GoogleAnalyticsComponent,
+  ],
   templateUrl: './app.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

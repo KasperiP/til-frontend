@@ -8,4 +8,5 @@ export const environment = {
   githubRedirectUri: 'http://localhost:4200/auth/oauth/github/callback',
   linkedinClientId: '77mc358dc7r7to',
   linkedinRedirectUri: 'http://localhost:4200/auth/oauth/linkedin/callback',
+  googleAnalyticsTrackingCode: 'G-SW145JPX3Y',
 };
