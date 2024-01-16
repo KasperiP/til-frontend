@@ -9,7 +9,7 @@ Today I Learned is an open-source platform for you to share your daily learning.
 #### Project repositories
 [![OpenGraph](https://img.shields.io/badge/OpenGraph-bfdbfe)](https://github.com/KasperiP/til-opengraph)
 [![Frontend Repository](https://img.shields.io/badge/Frontend-bbf7d0)](https://github.com/KasperiP/til-frontend)
-[![Frontend Repository](https://img.shields.io/badge/Brontend-fef08a)](https://github.com/KasperiP/til-backend)
+[![Frontend Repository](https://img.shields.io/badge/Backend-fef08a)](https://github.com/KasperiP/til-backend)
 
 </div>
   
