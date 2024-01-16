@@ -1,104 +1,115 @@
-<aside #menu class="sticky top-20 flex w-[350px] flex-col gap-6">
-  <div class="rounded-lg border-1 border-divider p-4 shadow-lg">
-    <h3 class="mb-4 text-2xl font-bold">Your statistics</h3>
-    <div class="relative flex flex-col gap-4">
-      @if (!isLoggedIn) {
-        <div class="absolute inset-0 z-20 flex items-center justify-center">
-          <div class="flex flex-col gap-2">
-            <p
-              class="max-w-52 rounded-lg bg-base-100/50 p-4 text-center text-sm font-semibold"
-            >
-              Login to see your statistics and star writing about your learnings
-              :) It's free!
-            </p>
+<ng-container
+  *ngTemplateOutlet="
+    feedMenu;
+    context: {
+      isLoggedIn: isLoggedIn$ | async
+    }
+  "
+/>
+
+<ng-template #feedMenu let-isLoggedIn="isLoggedIn">
+  <aside #menu class="sticky top-20 flex w-[350px] flex-col gap-6">
+    <div class="rounded-lg border-1 border-divider p-4 shadow-lg">
+      <h3 class="mb-4 text-2xl font-bold">Your statistics</h3>
+      <div class="relative flex flex-col gap-4">
+        @if (!isLoggedIn) {
+          <div class="absolute inset-0 z-20 flex items-center justify-center">
+            <div class="flex flex-col gap-2">
+              <p
+                class="max-w-52 rounded-lg bg-base-100/50 p-4 text-center text-sm font-semibold"
+              >
+                Login to see your statistics and star writing about your
+                learnings :) It's free!
+              </p>
+            </div>
           </div>
+        }
+        <div
+          class="rounded-lg border-1 border-dashed border-blue-400 bg-blue-200 p-4"
+          [ngClass]="{
+            'blur-sm': !isLoggedIn
+          }"
+        >
+          @if (loadingUserStats) {
+            <div class="flex flex-col gap-2">
+              <div class="skeleton h-4 w-full bg-base-100"></div>
+              <div class="skeleton h-4 w-full bg-base-100"></div>
+            </div>
+          } @else {
+            <h2 class="text-2xl font-bold">
+              {{ userStats?.userPosts ?? 'N/A' }}
+            </h2>
+            <p>Written posts</p>
+          }
         </div>
-      }
-      <div
-        class="rounded-lg border-1 border-dashed border-blue-400 bg-blue-200 p-4"
-        [ngClass]="{
-          'blur-sm': !isLoggedIn
-        }"
-      >
-        @if (loadingUserStats) {
-          <div class="flex flex-col gap-2">
-            <div class="skeleton h-4 w-full bg-base-100"></div>
-            <div class="skeleton h-4 w-full bg-base-100"></div>
-          </div>
-        } @else {
-          <h2 class="text-2xl font-bold">
-            {{ userStats?.userPosts ?? 'N/A' }}
-          </h2>
-          <p>Written posts</p>
-        }
-      </div>
-      <div
-        class="rounded-lg border-1 border-dashed border-green-600 bg-green-200 p-4"
-        [ngClass]="{
-          'blur-sm': !isLoggedIn
-        }"
-      >
-        @if (loadingUserStats) {
-          <div class="flex flex-col gap-2">
-            <div class="skeleton h-4 w-full bg-base-100"></div>
-            <div class="skeleton h-4 w-full bg-base-100"></div>
-          </div>
-        } @else {
-          <h2 class="text-2xl font-bold">
-            {{ userStats?.userStreak ?? 'N/A' }}
-          </h2>
-          <p>Current streak</p>
-        }
-      </div>
-      <div
-        class="rounded-lg border-1 border-dashed border-pink-300 bg-pink-200 p-4"
-        [ngClass]="{
-          'blur-sm': !isLoggedIn
-        }"
-      >
-        @if (loadingUserStats) {
-          <div class="flex flex-col gap-2">
-            <div class="skeleton h-4 w-full bg-base-100"></div>
-            <div class="skeleton h-4 w-full bg-base-100"></div>
-          </div>
-        } @else {
-          <h2 class="text-2xl font-bold">
-            {{ userStats?.userLikes ?? 'N/A' }}
-          </h2>
-          <p>Received likes</p>
-        }
+        <div
+          class="rounded-lg border-1 border-dashed border-green-600 bg-green-200 p-4"
+          [ngClass]="{
+            'blur-sm': !isLoggedIn
+          }"
+        >
+          @if (loadingUserStats) {
+            <div class="flex flex-col gap-2">
+              <div class="skeleton h-4 w-full bg-base-100"></div>
+              <div class="skeleton h-4 w-full bg-base-100"></div>
+            </div>
+          } @else {
+            <h2 class="text-2xl font-bold">
+              {{ userStats?.userStreak ?? 'N/A' }}
+            </h2>
+            <p>Current streak</p>
+          }
+        </div>
+        <div
+          class="rounded-lg border-1 border-dashed border-pink-300 bg-pink-200 p-4"
+          [ngClass]="{
+            'blur-sm': !isLoggedIn
+          }"
+        >
+          @if (loadingUserStats) {
+            <div class="flex flex-col gap-2">
+              <div class="skeleton h-4 w-full bg-base-100"></div>
+              <div class="skeleton h-4 w-full bg-base-100"></div>
+            </div>
+          } @else {
+            <h2 class="text-2xl font-bold">
+              {{ userStats?.userLikes ?? 'N/A' }}
+            </h2>
+            <p>Received likes</p>
+          }
+        </div>
       </div>
     </div>
-  </div>
-  <div class="rounded-lg border-1 border-divider p-4 shadow-lg">
-    <h3 class="mb-4 text-2xl font-bold">Other statistics</h3>
-    <div class="relative flex flex-col gap-4">
-      <div class="rounded-lg bg-neutral p-4">
-        @if (loadingGlobalStats) {
-          <div class="flex flex-col gap-2">
-            <div class="skeleton h-4 w-full bg-base-100"></div>
-            <div class="skeleton h-4 w-full bg-base-100"></div>
-          </div>
-        } @else {
-          <h2 class="text-2xl font-bold">
-            {{ globalStats?.postsLastWeek ?? 'N/A' }}
-          </h2>
-          <p>Posts last 7 days</p>
-        }
-      </div>
-      <div class="rounded-lg bg-neutral p-4">
-        @if (loadingGlobalStats) {
-          <div class="flex flex-col gap-2">
-            <div class="skeleton h-4 w-full bg-base-100"></div>
-            <div class="skeleton h-4 w-full bg-base-100"></div>
-          </div>
-        } @else {
-          <h2 class="text-2xl font-bold">
-            {{ globalStats?.totalPosts ?? 'N/A' }}
-          </h2>
-          <p>Total posts</p>
-        }
+    <div class="rounded-lg border-1 border-divider p-4 shadow-lg">
+      <h3 class="mb-4 text-2xl font-bold">Other statistics</h3>
+      <div class="relative flex flex-col gap-4">
+        <div class="rounded-lg bg-neutral p-4">
+          @if (loadingGlobalStats) {
+            <div class="flex flex-col gap-2">
+              <div class="skeleton h-4 w-full bg-base-100"></div>
+              <div class="skeleton h-4 w-full bg-base-100"></div>
+            </div>
+          } @else {
+            <h2 class="text-2xl font-bold">
+              {{ globalStats?.postsLastWeek ?? 'N/A' }}
+            </h2>
+            <p>Posts last 7 days</p>
+          }
+        </div>
+        <div class="rounded-lg bg-neutral p-4">
+          @if (loadingGlobalStats) {
+            <div class="flex flex-col gap-2">
+              <div class="skeleton h-4 w-full bg-base-100"></div>
+              <div class="skeleton h-4 w-full bg-base-100"></div>
+            </div>
+          } @else {
+            <h2 class="text-2xl font-bold">
+              {{ globalStats?.totalPosts ?? 'N/A' }}
+            </h2>
+            <p>Total posts</p>
+          }
+        </div>
       </div>
     </div>
-  </div>
-</aside>
+  </aside>
+</ng-template>

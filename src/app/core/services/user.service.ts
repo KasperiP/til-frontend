@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, tap } from 'rxjs';
+import { BehaviorSubject, catchError, map, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { ApiUser, ApiUserStatistics } from '../models/api.model';
 import { ErrorHandlerService } from './error-handler.service';
@@ -11,6 +11,8 @@ import { ErrorHandlerService } from './error-handler.service';
 export class UserService {
   readonly user$: BehaviorSubject<ApiUser | null> =
     new BehaviorSubject<ApiUser | null>(null);
+
+  readonly isLoggedIn$ = this.user$.pipe(map((user) => !!user));
 
   constructor(
     private http: HttpClient,

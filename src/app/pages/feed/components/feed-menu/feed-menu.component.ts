@@ -1,15 +1,11 @@
-import { CommonModule, isPlatformBrowser } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Inject,
-  Input,
-  PLATFORM_ID,
-} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 import {
   ApiStatistics,
   ApiUserStatistics,
 } from '../../../../core/models/api.model';
+import { UserService } from '../../../../core/services/user.service';
 
 @Component({
   selector: 'til-feed-menu',
@@ -24,13 +20,7 @@ export class FeedMenuComponent {
   @Input() globalStats: ApiStatistics | null = null;
   @Input() loadingUserStats = false;
   @Input() loadingGlobalStats = false;
+  isLoggedIn$: Observable<boolean> = this.userService.isLoggedIn$;
 
-  constructor(@Inject(PLATFORM_ID) private readonly platformId: string) {}
-
-  get isLoggedIn(): boolean {
-    if (isPlatformBrowser(this.platformId)) {
-      return !!localStorage.getItem('isLoggedIn');
-    }
-    return false;
-  }
+  constructor(private readonly userService: UserService) {}
 }
