@@ -1,11 +1,9 @@
-import { isPlatformBrowser } from '@angular/common';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   Inject,
-  OnInit,
   PLATFORM_ID,
-  Renderer2,
 } from '@angular/core';
 import { environment } from '../../../environments/environment';
 
@@ -16,39 +14,34 @@ import { environment } from '../../../environments/environment';
   template: '',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GoogleAnalyticsComponent implements OnInit {
-  trackingCode = environment.googleAnalyticsTrackingCode;
-
+export class GoogleAnalyticsComponent {
   constructor(
     @Inject(PLATFORM_ID) private readonly platformId: string,
-    private readonly renderer: Renderer2,
-  ) {}
+    @Inject(DOCUMENT) private document: Document,
+  ) {
+    const gaTrackId = environment.googleAnalyticsTrackingCode;
+    if (isPlatformBrowser(this.platformId)) {
+      const scriptGtag = this.document.createElement(
+        'script',
+      ) as HTMLScriptElement;
+      scriptGtag.src = `//www.googletagmanager.com/gtag/js?id=${gaTrackId}`;
+      scriptGtag.async = true;
+      this.document.head.appendChild(scriptGtag);
 
-  ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId) && environment.production) {
-      this.appendGoogleAnalyticsScripts();
+      const scriptInit = this.document.createElement(
+        'script',
+      ) as HTMLScriptElement;
+      const scriptBody = this.document.createTextNode(`
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', '${gaTrackId}');
+      `);
+
+      scriptInit.appendChild(scriptBody);
+      this.document.head.appendChild(scriptInit);
     }
-  }
-
-  private appendGoogleAnalyticsScripts(): void {
-    const head = document.getElementsByTagName('head')[0];
-
-    const script = this.renderer.createElement('script');
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${this.trackingCode}`;
-    script.async = true;
-    this.renderer.appendChild(head, script);
-
-    const script2 = this.renderer.createElement('script');
-    const scriptBody = this.renderer.createText(`
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
-
-      gtag('config', '${this.trackingCode}');
-    `);
-    this.renderer.appendChild(script2, scriptBody);
-    this.renderer.appendChild(head, script2);
   }
 }
