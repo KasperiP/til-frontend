@@ -14,29 +14,46 @@
       <div class="flex flex-col gap-4">
         <h1 class="text-4xl font-extrabold">{{ post.title }}</h1>
         <p class="text-2xl">{{ post.description }}</p>
-        <div class="flex items-center gap-2">
-          <div class="avatar">
-            <div
-              class="w-12 rounded-full bg-gradient-to-tr from-blue-200 to-green-200"
-            >
-              <img
-                alt="Avatar"
-                onerror="this.className = 'hidden'"
-                [src]="post.image"
-              />
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="avatar">
+              <div
+                class="w-12 rounded-full bg-gradient-to-tr from-blue-200 to-green-200"
+              >
+                <img
+                  alt="Avatar"
+                  onerror="this.className = 'hidden'"
+                  [src]="post.image"
+                />
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="flex flex-col overflow-auto">
+                <h3 class="truncate font-bold">
+                  {{ post.name }}
+                </h3>
+                <p class="truncate text-sm text-gray-500">
+                  <span class="text-sm">{{ post.readTime }} min read</span> ·
+                  {{ post.postCreatedAt | date: 'MMM d, y' }} ·
+                  {{ post.likes }} likes
+                </p>
+              </div>
             </div>
           </div>
-          <div class="flex items-center gap-4">
-            <div class="flex flex-col overflow-auto">
-              <h3 class="truncate font-bold">
-                {{ post.name }}
-              </h3>
-              <p class="truncate text-sm text-gray-500">
-                <span class="text-sm">{{ post.readTime }} min read</span> ·
-                {{ post.postCreatedAt | date: 'MMM d, y' }} ·
-                {{ post.likes }} likes
-              </p>
-            </div>
+          <div>
+            <button class="btn" (click)="likeRequest$.next(post.postId)">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                viewBox="0 -960 960 960"
+                width="24"
+                fill="currentColor"
+              >
+                <path
+                  d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Zm0-108q96-86 158-147.5t98-107q36-45.5 50-81t14-70.5q0-60-40-100t-100-40q-47 0-87 26.5T518-680h-76q-15-41-55-67.5T300-774q-60 0-100 40t-40 100q0 35 14 70.5t50 81q36 45.5 98 107T480-228Zm0-273Z"
+                /></svg
+              >{{ post.userHasLiked ? 'Unlike' : 'Like' }}
+            </button>
           </div>
         </div>
       </div>

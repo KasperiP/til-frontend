@@ -47,4 +47,10 @@ export class PostsService {
       .get<ApiPost>(`${environment.baseUrl}/api/posts/getFull?id=${id}`)
       .pipe(catchError((e) => this.errorHandlingService.handleError(e)));
   }
+
+  likePost(id: string) {
+    return this.http
+      .post<void>(`${environment.baseUrl}/api/posts/like`, { postId: id })
+      .pipe(catchError((e) => this.errorHandlingService.handleError(e)));
+  }
 }

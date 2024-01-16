@@ -1,13 +1,28 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MarkdownComponent } from 'ngx-markdown';
-import { catchError, tap } from 'rxjs';
+import {
+  Observable,
+  Subject,
+  catchError,
+  debounceTime,
+  switchMap,
+  takeUntil,
+  tap,
+} from 'rxjs';
 
-import { ApiPost } from '../../core/models/api.model';
+import { ApiError, ApiPost } from '../../core/models/api.model';
 import { PostsService } from '../../core/services/posts.service';
+import { UserService } from '../../core/services/user.service';
 
 @Component({
   selector: 'til-post',
@@ -17,18 +32,50 @@ import { PostsService } from '../../core/services/posts.service';
   styleUrls: ['./post.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PostComponent {
+export class PostComponent implements OnInit, OnDestroy {
   postSig = signal<ApiPost | null>(null);
   loadingSig = signal<boolean>(true);
+  isLoggedIn$: Observable<boolean> = this.userService.isLoggedIn$;
+  likeRequest$ = new Subject<string>();
+  private readonly onDestroy$ = new Subject<void>();
 
   constructor(
     private route: ActivatedRoute,
     private postsService: PostsService,
+    private userService: UserService,
     private router: Router,
     private meta: Meta,
     private title: Title,
   ) {
     this.loadPost();
+  }
+
+  ngOnInit() {
+    this.likeRequest$
+      .pipe(
+        takeUntil(this.onDestroy$),
+        debounceTime(500),
+        switchMap((id) => this.likePost(id)),
+      )
+      .subscribe();
+  }
+
+  ngOnDestroy() {
+    this.onDestroy$.next();
+    this.onDestroy$.complete();
+  }
+
+  private likePost(id: string): Observable<ApiPost | ApiError> {
+    return this.postsService.likePost(id).pipe(
+      switchMap(() =>
+        this.postsService.getPost(id).pipe(
+          tap((post) => {
+            if ('isError' in post) return;
+            this.postSig.set(post);
+          }),
+        ),
+      ),
+    );
   }
 
   private loadPost = () => {

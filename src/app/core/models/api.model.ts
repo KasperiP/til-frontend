@@ -44,7 +44,9 @@ export interface ApiFullPost extends ApiPreviewPost {
   content: string;
 }
 
-export type ApiPost = ApiPreviewPost;
+export type ApiPost = ApiPreviewPost & {
+  userHasLiked: boolean;
+};
 
 export interface ApiPreviewPosts {
   posts: ApiPreviewPost[];
