@@ -25,6 +25,7 @@ export class GoogleAnalyticsComponent {
     private readonly el: ElementRef,
   ) {
     if (isPlatformBrowser(this.platformId)) {
+      if (!environment.production) return;
       const script = this.renderer.createElement('script') as HTMLScriptElement;
       script.src = `//www.googletagmanager.com/gtag/js?id=${this.trackingCode}`;
       script.async = true;
