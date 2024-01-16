@@ -36,6 +36,7 @@ export class PostComponent implements OnInit, OnDestroy {
   postSig = signal<ApiPost | null>(null);
   loadingSig = signal<boolean>(true);
   isLoggedIn$: Observable<boolean> = this.userService.isLoggedIn$;
+  user$ = this.userService.user$;
   likeRequest$ = new Subject<string>();
   private readonly onDestroy$ = new Subject<void>();
 

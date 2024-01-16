@@ -42,6 +42,7 @@ export interface ApiStatistics {
 
 export interface ApiFullPost extends ApiPreviewPost {
   content: string;
+  authorId: number;
 }
 
 export type ApiPost = ApiPreviewPost & {

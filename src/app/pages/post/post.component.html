@@ -4,7 +4,8 @@
     context: {
       post: postSig(),
       loading: loadingSig(),
-      isLoggedIn: isLoggedIn$ | async
+      isLoggedIn: isLoggedIn$ | async,
+      user: user$ | async
     }
   "
 />
@@ -14,6 +15,7 @@
   let-post="post"
   let-loading="loading"
   let-isLoggedIn="isLoggedIn"
+  let-user="user"
 >
   <section class="flex w-full max-w-3xl flex-col gap-8 px-4 py-20">
     @if (!loading) {
@@ -48,7 +50,11 @@
           </div>
           <div>
             @if (isLoggedIn) {
-              <button class="btn" (click)="likeRequest$.next(post.postId)">
+              <button
+                class="btn"
+                [disabled]="user.id === post.authorId"
+                (click)="likeRequest$.next(post.postId)"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="24"
