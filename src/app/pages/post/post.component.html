@@ -43,7 +43,7 @@
       <div class="divider my-0 before:bg-divider after:bg-divider"></div>
       <article class="til-markdown prose">
         @if (post) {
-          <markdown clipboard [data]="post.content" />
+          <markdown [data]="post.content" />
         }
       </article>
     } @else {

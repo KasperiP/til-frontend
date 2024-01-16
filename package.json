@@ -50,7 +50,6 @@
     "@angular/router": "^17.0.9",
     "@angular/ssr": "^17.0.10",
     "@tailwindcss/typography": "^0.5.10",
-    "clipboard": "^2.0.11",
     "express": "^4.18.2",
     "marked": "^9.1.6",
     "ngx-markdown": "^17.1.1",

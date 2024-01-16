@@ -42,8 +42,7 @@
               "node_modules/prismjs/components/json.min.js",
               "node_modules/prismjs/components/javascript.min.js",
               "node_modules/prismjs/components/css.min.js",
-              "node_modules/prismjs/components/scss.min.js",
-              "node_modules/clipboard/dist/clipboard.min.js"
+              "node_modules/prismjs/components/scss.min.js"
             ],
             "server": "src/main.server.ts",
             "prerender": {
