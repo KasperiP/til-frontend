@@ -1,6 +1,7 @@
 {
-  "name": "",
-  "short_name": "",
+  "name": "Today I Learned",
+  "short_name": "TIL",
+
   "icons": [
     {
       "src": "/assets/favicon/android-chrome-192x192.png",
@@ -15,5 +16,6 @@
   ],
   "theme_color": "#ffffff",
   "background_color": "#ffffff",
-  "display": "standalone"
+  "scope": "/",
+  "start_url": "/"
 }
