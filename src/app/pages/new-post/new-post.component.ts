@@ -58,8 +58,8 @@ export class NewPostComponent implements OnInit, OnDestroy {
         '',
         [
           Validators.required,
-          Validators.minLength(5),
-          Validators.maxLength(50),
+          Validators.minLength(10),
+          Validators.maxLength(100),
         ],
       ],
       description: [
