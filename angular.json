@@ -37,6 +37,12 @@
               "node_modules/prismjs/prism.js",
               "node_modules/prismjs/components/prism-csharp.min.js",
               "node_modules/prismjs/components/prism-css.min.js",
+              "node_modules/prismjs/components/typescript.min.js",
+              "node_modules/prismjs/components/json5.min.js",
+              "node_modules/prismjs/components/json.min.js",
+              "node_modules/prismjs/components/javascript.min.js",
+              "node_modules/prismjs/components/css.min.js",
+              "node_modules/prismjs/components/scss.min.js",
               "node_modules/clipboard/dist/clipboard.min.js"
             ],
             "server": "src/main.server.ts",
