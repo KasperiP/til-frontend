@@ -1,3 +1,54 @@
-<section class="px-8 py-20 max-md:px-4">
-  <h2 class="text-4xl font-bold">Profile</h2>
-</section>
+<ng-container *ngTemplateOutlet="profile; context: { user: user$ | async }" />
+
+<ng-template #profile let-user="user">
+  <section class="flex flex-col gap-4 px-8 py-20 max-md:px-4">
+    <h2 class="text-4xl font-bold">Profile</h2>
+    <div class="rounded-lg border-1 border-divider px-4 py-6 shadow-lg">
+      <h2 class="mb-4 text-2xl font-bold">Details</h2>
+      <div class="flex flex-col gap-1">
+        <div
+          class="flex items-center max-md:justify-between max-sm:flex-col max-sm:items-start"
+        >
+          <h3 class="w-1/4 max-md:w-auto">Email</h3>
+          @if (user) {
+            <p class="text-sm text-gray-500">{{ user.email }}</p>
+          } @else {
+            <div class="skeleton h-4 w-full max-w-sm bg-neutral"></div>
+          }
+        </div>
+        <div
+          class="flex items-center max-md:justify-between max-sm:flex-col max-sm:items-start"
+        >
+          <h3 class="w-1/4 max-md:w-auto">Username</h3>
+          @if (user) {
+            <p class="text-sm text-gray-500">{{ user.name }}</p>
+          } @else {
+            <div class="skeleton h-4 w-full max-w-sm bg-neutral"></div>
+          }
+        </div>
+        <div
+          class="flex items-center max-md:justify-between max-sm:flex-col max-sm:items-start"
+        >
+          <h3 class="w-1/4 max-md:w-auto">Auth provider</h3>
+          @if (user) {
+            <p class="text-sm text-gray-500">{{ user.authType }}</p>
+          } @else {
+            <div class="skeleton h-4 w-full max-w-sm bg-neutral"></div>
+          }
+        </div>
+        <div
+          class="flex items-center max-md:justify-between max-sm:flex-col max-sm:items-start"
+        >
+          <h3 class="w-1/4 max-md:w-auto">Registration time</h3>
+          @if (user) {
+            <p class="text-sm text-gray-500">
+              {{ user.createdAt | date: 'medium' }}
+            </p>
+          } @else {
+            <div class="skeleton h-4 w-full max-w-sm bg-neutral"></div>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</ng-template>
